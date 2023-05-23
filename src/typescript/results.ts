@@ -37,7 +37,7 @@ function orderScores(score: number[], users: Score[]): Score[] {
         }
         ordered.push({
             ...user,
-            bias: sum
+            bias: sum/user.stats.length
         });
     }
 
