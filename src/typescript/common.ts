@@ -72,7 +72,7 @@ export class Canvas {
         this.ctx.fillRect(0, 0, this.params.width, this.params.height);
     }
 
-    private drawValueBg(height: number): void {
+    private _drawValueBg(height: number): void {
         this.ctx.strokeStyle = "#000";
         this.ctx.lineJoin = "round";
         this.ctx.lineWidth = 75;
@@ -80,7 +80,7 @@ export class Canvas {
         this.ctx.strokeRect(165, 50 + height, 470, 0);
     }
 
-    private drawHalfCircle(x: number, y: number, r: number, color: string, reverse: boolean): void {
+    private _drawHalfCircle(x: number, y: number, r: number, color: string, reverse: boolean): void {
         const [s, e] = reverse ? [1.5, 0.5] : [0.5, 1.5];
         this.ctx.fillStyle = color;
         this.ctx.beginPath();
@@ -88,14 +88,14 @@ export class Canvas {
         this.ctx.fill();
     }
 
-    private drawScoreRect(value: Value, score: number, index: number): void {
+    private _drawScoreRect(value: Value, score: number, index: number): void {
         this.ctx.lineWidth = 65;
         const height = 220 + index * 120;
         let [v1, v2] = value.color;
         const [c1, c2] = score > 98 ? [v1, v1] : score < 2 ? [v2, v2] : [v1, v2];
         //Draw ends
-        this.drawHalfCircle(166, height, 32, c1, false);
-        this.drawHalfCircle(634, height, 32, c2, true);
+        this._drawHalfCircle(166, height, 32, c1, false);
+        this._drawHalfCircle(634, height, 32, c2, true);
         //Draw bars
         const extra = score > 98 || score < 2 ? 6 : 0;
         const gap = Math.max(Math.min(score, 98), 2) - 2;
@@ -106,7 +106,7 @@ export class Canvas {
         this.ctx.fillRect(172 + ratio, height - 32, (464 - ratio), 64);
     }
 
-    private drawScoreLabel(value: Value, score: number, index: number): string {
+    private _drawScoreLabel(value: Value, score: number, index: number): string {
         this.ctx.font = `32px '${this.params.font}', sans-serif`;
         const height = index * 120 + 232.5;
 
@@ -150,9 +150,9 @@ export class Canvas {
     async drawValue(value: Value, score: number, index: number, drawImages = true): Promise<string> {
         const height = 170 + index * 120;
 
-        this.drawValueBg(height);
-        this.drawScoreRect(value, score, index);
-        const tier = this.drawScoreLabel(value, score, index);
+        this._drawValueBg(height);
+        this._drawScoreRect(value, score, index);
+        const tier = this._drawScoreLabel(value, score, index);
         if (drawImages) {
             const { icons } = value;
             const [l, r] = await Promise.all(
@@ -173,13 +173,17 @@ export class Canvas {
         this.ctx.font = `30px '${this.params.font}', sans-serif`
         const user = !params.gallery ?
             "Closest match: " + params.user : params.user;
-        this.ctx.fillText(user, 20, 130, 700)
+        this.ctx.fillText(user, 20, 130, 480)
 
         this.ctx.textAlign = "right"
         this.ctx.font = `300 25px '${this.params.font}', sans-serif`
         this.ctx.fillText("pcbvalues.github.io", 780, 40)
         this.ctx.fillText(params.version, 780, 70)
         this.ctx.fillText(params.edition, 780, 100)
+
+        const date = (new Date()).toLocaleDateString("en-GB");
+        const text = `${params.gallery ? "Viewed" : "Taken"} on ${date}`;
+        this.ctx.fillText(text, 780, 130);
     }
 
     static findTier(score: number, tiers: string[]): string {

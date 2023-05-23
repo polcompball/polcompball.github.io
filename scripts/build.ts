@@ -16,7 +16,13 @@ const params = {
             ecma: 2022,
             arrows: true,
             unsafe: true,
-            unsafe_arrows: true
+            unsafe_arrows: true,
+            passes: 2
+        },
+        mangle: {
+            properties: {
+                regex: /^_/
+            }
         },
         module: true,
         toplevel: true

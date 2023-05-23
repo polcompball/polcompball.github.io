@@ -37,7 +37,7 @@ function orderScores(score: number[], users: Score[]): Score[] {
         }
         ordered.push({
             ...user,
-            bias: sum/user.stats.length
+            bias: sum / user.stats.length
         });
     }
 
@@ -46,7 +46,7 @@ function orderScores(score: number[], users: Score[]): Score[] {
 
 
 function addClosestMatches(users: Score[]): string {
-    const matchBias = (1 - (users[0]?.bias ?? 0)) * 100;
+    const matchBias = (1 - (users[0]?.bias ?? 1)) * 100;
 
     document.getElementById("cmatch")!.textContent =
         `${users[0].name}: ${matchBias.toFixed(1)}%`;
