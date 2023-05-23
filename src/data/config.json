@@ -1,0 +1,377 @@
+{
+    "values": [
+        {
+            "name": "demeanor",
+            "key": "dmnr",
+            "desc": [
+                "Believes online political discourse should be more structured and serious. Expresses themselves more genuinely and presents themselves more professionally.",
+                "Believes in engaging with their communities just for fun and does not seek deep meaningful discussions. Expresses themselves more jokingly and presents themselves in a more laidback manner."
+            ],
+            "labels": [
+                "sincerity",
+                "irony"
+            ],
+            "icons": [
+                "sincerity.svg",
+                "irony.svg"
+            ],
+            "color": [
+                "#204F95",
+                "#FFFFFF"
+            ],
+            "white_label": [
+                true,
+                false
+            ],
+            "tiers": [
+                "Austere",
+                "Authentic",
+                "Veracious",
+                "Serious",
+                "Sensible",
+                "Sober",
+                "Lighthearted",
+                "Silly",
+                "Kidding",
+                "Ludicrous",
+                "Incoherent"
+            ]
+        },
+        {
+            "name": "personality",
+            "key": "pers",
+            "desc": [
+                "Believes people should act more nicely to one another and strives to emulate the ideals of respectfulness, kindness, and compassion.",
+                "Believes people should express the more darker facets of their personality and often does not see much good in people. Acts in ways that may be seen as mean, unpleasant, or disagreeable."
+            ],
+            "labels": [
+                "wholesome",
+                "edgy"
+            ],
+            "icons": [
+                "wholesome.svg",
+                "edgy.svg"
+            ],
+            "color": [
+                "#FC8028",
+                "#981900"
+            ],
+            "white_label": [
+                false,
+                true
+            ],
+            "tiers": [
+                "Affectionate",
+                "Amiable",
+                "Caring",
+                "Goodwilling",
+                "Respectful",
+                "Polite",
+                "Uncivil",
+                "Unfriendly",
+                "Cold",
+                "Dark",
+                "Hostile"
+            ]
+        },
+        {
+            "name": "judgement",
+            "key": "judg",
+            "desc": [
+                "Believes more care should be taken to not offend nor trample upon the rights of minorities. Supports stricter moderation measures to quell discrimination or prejudicial views/statements.",
+                "Believes more freedom should be granted to freely express controversial or uninclusive views. May be less worried than others about corporations taking action to shut down communities. Therefore, might end up on the receiving end of discipline for breaking rules of Terms of Service."
+            ],
+            "labels": [
+                "sensitive",
+                "fedposter"
+            ],
+            "icons": [
+                "sensitive.svg",
+                "fedposter.svg"
+            ],
+            "color": [
+                "#2BF935",
+                "#00CFFF"
+            ],
+            "white_label": [
+                false,
+                false
+            ],
+            "tiers": [
+                "SJW",
+                "Careful",
+                "Inclusive",
+                "Cautioned",
+                "Attentive",
+                "Moderate",
+                "Unaffected",
+                "Biased",
+                "Selective",
+                "Intolerant",
+                "Reckless"
+            ]
+        },
+        {
+            "name": "politics",
+            "key": "polt",
+            "desc": [
+                "Believes that political, economic, and philosophical theory and literature should play a large role in political discourse and thought. More likely to call for political literacy and education, and to tend to exclude those who are not knowledgeable.",
+                "Believes that politics should more so come from the heart, feelings, intuition, and instincts rather than facts, reason, research, and reading. Believes in individuals' rights to choose their opinions, even if mix-matched, and to dismiss prominent thinkers and resist being politically influenced."
+            ],
+            "labels": [
+                "theory",
+                "freeform"
+            ],
+            "icons": [
+                "theory.svg",
+                "freeform.svg"
+            ],
+            "color": [
+                "#7D0707",
+                "#009245"
+            ],
+            "white_label": [
+                true,
+                false
+            ],
+            "tiers": [
+                "Nerd",
+                "Bookworm",
+                "Intellectual",
+                "Learned",
+                "Thinker",
+                "Intermediate",
+                "Inspired",
+                "Unbound",
+                "Independent",
+                "Unreasoned",
+                "Illogical"
+            ]
+        },
+        {
+            "name": "realism",
+            "key": "real",
+            "desc": [
+                "Likely to validate and support only ideologies that have a realistic chance of working in the real world. More strict about what gets counted as a true ideology and dismisses idealistic/utopian or ridiculous ways of thinking.",
+                "Embraces unorthodox political thought and accepts unconstrained ideological thinking. More lax about ideological validity and believes in and supports ideas that aren't necessarily relevant to the real world."
+            ],
+            "labels": [
+                "pragmatic",
+                "idealist"
+            ],
+            "icons": [
+                "pragmatic.svg",
+                "idealist.svg"
+            ],
+            "color": [
+                "#52CE3C",
+                "#F7B1BB"
+            ],
+            "white_label": [
+                false,
+                false
+            ],
+            "tiers": [
+                "Status Quo",
+                "Nonfiction",
+                "Practical",
+                "Achievable",
+                "Ideological",
+                "Balanced",
+                "Visionary",
+                "Radical",
+                "Extreme",
+                "Utopian",
+                "Quixotic"
+            ]
+        },
+        {
+            "name": "perception",
+            "key": "perc",
+            "desc": [
+                "Likely to be well-known and liked in their community.",
+                "Likely to be hated or be seen as an outcast within the community. May be unaccepted, disrespected, or shamed."
+            ],
+            "labels": [
+                "popular",
+                "disliked"
+            ],
+            "icons": [
+                "popular.svg",
+                "disliked.svg"
+            ],
+            "color": [
+                "#FF0000",
+                "#9989FF"
+            ],
+            "white_label": [
+                false,
+                false
+            ],
+            "tiers": [
+                "Venerated",
+                "Loved",
+                "Admired",
+                "Appreciated",
+                "Respected",
+                "Undiscussed",
+                "Mixed Feelings",
+                "Disfavored",
+                "Shunned",
+                "Opposed",
+                "Hated"
+            ]
+        },
+        {
+            "name": "hornyposting",
+            "key": "horn",
+            "desc": [
+                "Believes the upstanding purity side of rule enforcement does not matter as much, and prefers that there be more freedom when it comes discussion of adult-topics and making inappropriate jokes.",
+                "Believes that enforcing family-friendly purity and cleaning chat of suggestive material is very important. Supports a crack down on obscene material or any comments with impure intentions."
+            ],
+            "labels": [
+                "unfiltered",
+                "chaste"
+            ],
+            "icons": [
+                "unfiltered.svg",
+                "chaste.svg"
+            ],
+            "color": [
+                "#FFF700",
+                "#FEC62B"
+            ],
+            "white_label": [
+                false,
+                false
+            ],
+            "tiers": [
+                "Corrupt",
+                "Crude",
+                "Adulterated",
+                "Impure",
+                "Libertine",
+                "Temperate",
+                "Composed",
+                "Decent",
+                "Restrained",
+                "Protective",
+                "Controlling"
+            ]
+        }
+    ],
+    "discord_url": "https://discord.gg/RveUH9pbgV",
+    "api_url": "https://pcbval.theghostofinky.repl.co/apiv3/",
+    "title": "PCBvalues",
+    "url": "pcbvalues.github.io",
+    "desc": "PCBvalues is a test for what kind of member of the political community you are and what camps you fall into.",
+    "credits": [
+        {
+            "title": "Coding:",
+            "elms": [
+                {
+                    "name": "TheGhostOfInky"
+                },
+                {
+                    "name": "(Based on the code of) TristanBomb"
+                }
+            ]
+        },
+        {
+            "title": "Art assets and vectorization:",
+            "elms": [
+                {
+                    "name": "Based and Jedpilled"
+                },
+                {
+                    "name": "TheGhostOfInky"
+                }
+            ]
+        },
+        {
+            "title": "Axis labels:",
+            "elms": [
+                {
+                    "name": "The polcompball discord community"
+                }
+            ]
+        },
+        {
+            "title": "Value representatives:",
+            "elms": [
+                {
+                    "name": "AquaHeart (Sincerity)",
+                    "color": "204F95"
+                },
+                {
+                    "name": "jao (Irony)",
+                    "color": "FFFFFF"
+                },
+                {
+                    "name": "Voizen (Wholesome)",
+                    "color": "FC8028"
+                },
+                {
+                    "name": "BERNHE0504/ACato12 (Edgy)",
+                    "color": "981900"
+                },
+                {
+                    "name": "IAmSeamonkey (Sensitive)",
+                    "color": "2BF935"
+                },
+                {
+                    "name": "hydra (Fedposter)",
+                    "color": "00CFFF"
+                },
+                {
+                    "name": "nguyenreich (Theory)",
+                    "color": "7D0707"
+                },
+                {
+                    "name": "b0n3rforce (Freeform)",
+                    "color": "009245"
+                },
+                {
+                    "name": "Founding Froggers (Pragmatic)",
+                    "color": "52CE3C"
+                },
+                {
+                    "name": "Sabkv (Idealist)",
+                    "color": "F7B1BB"
+                },
+                {
+                    "name": "Bery (Popular)",
+                    "color": "FF0000"
+                },
+                {
+                    "name": "Aesoth/Canzone (Disliked)",
+                    "color": "9989FF"
+                },
+                {
+                    "name": "Hospee (Unfiltered)",
+                    "color": "FFF700"
+                },
+                {
+                    "name": "Based and Jedpilled (Chaste)",
+                    "color": "FEC62B"
+                }
+            ]
+        },
+        {
+            "title": "Questions:",
+            "elms": [
+                {
+                    "name": "The polcompball discord community"
+                }
+            ]
+        },
+        {
+            "title": "Index descriptions:",
+            "elms": [
+                {
+                    "name": "The polcompball discord community"
+                }
+            ]
+        }
+    ]
+}

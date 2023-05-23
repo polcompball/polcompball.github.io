@@ -1,0 +1,1178 @@
+[
+    {
+        "question": "I prefer to use proper grammar and spelling online.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I like to elaborate with long genuine sentiments or explanations.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I usually don't enjoy posting memes.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Our community is a place where we should have serious discussions or debates.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "There's something wrong with intentional misspellings and acting \"silly\" for the sake of it.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I mean what I say and say what I mean.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I enjoy reading and typing long drawn out \"essayposts\" or walls of text.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I present myself in a way that's decidedly different, adding a sort of \"special creativity\" to my personality.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": -10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "My politics seems to change based on who I'm trolling.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": -10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Nothing wrong with some good old fashioned online larping, no need to be so serious or genuine.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": -10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I type in an particular way with a lot of emoticons and text faces :3",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": -10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I joke around a lot.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": -10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Engaging in a way that emphasizes lighthearted fun is my preferred way to go about things.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": -10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I make things up about my ideology to joke around with or impress others.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": -10,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I'd like to give a warm welcome to people just entering a community that I'm established in.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "When I want something, I ask politely, with please, without pressure, giving thanks.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "It hurts me to see others suffer, even if they have wronged me.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I care about those who are less fortunate and I want to do things to help.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I'm here to make friends, not enemies.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I want to resolve drama, conflicts, and beef, ensuring everyone gets along with each other.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I refrain from name-calling, swearing, and threatening.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "People would not come to me for advice or emotional support/help, or if they did, I would turn them away.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": -10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "There is no need for genuine feel-good interactions, I prefer keeping things unemotional.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": -10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I say things solely to alienate or anger others.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": -10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I don't allow myself to be pushed around by others, I do what I want.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": -10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I don't have faith in humanity, people are not good, the world is cold and harsh.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": -10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Others don't deserve what I have.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": -10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I have been called callous, insensitive, remorseless, or an \"edgelord\"",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": -10,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Those who advocate for unequal treatment of minorities should be handled stricly by moderation, or deplatformed.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "We should be more strict about censoring support for slavery, fascism, and totalitarianism.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "We must ensure support for queer identities.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Transgender individuals should be accepted, their pronouns respected, and their identities should be recognized.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Reactionary ideologies such as Nazism shouldn't be allowed within our community.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Ethnic and national backgrounds should not be a factor that others are judged by.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "In the modern era, eugenics is a legitimate topic of discussion.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": -10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Throughout history, there have been misconceptions about China, North Korea, and Russia. It's reasonable to defend these states at times.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": -10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Despite the policies of our social media platform, we should allow and therefore not moderate leaking classified/military info and posting weapon/drug instructions.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": -10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "My opinions could easily get me cancelled as they go against the woke narrative.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": -10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Political correctness has gone too far, we shouldn't have to be so careful about offending people.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": -10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Not all groups are equal, some commit more crime, some work harder than others.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": -10,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Those who are politically illiterate should read theory before posting political commentary.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I do read or plan to read theory.",
+        "yesno": true,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I have read 10 or more political, economic, or philosophical written works",
+        "yesno": true,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I look down upon those who are clueless and uninformed about politics, economics, philosophy.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Politics should come from reading, research, or debate.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "My views are based on my own insticts, values, and personal opinions that aren't derived from any particular thinker.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": -10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "It's good to trust your gut and believe what truly feels right.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": -10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I'm not big on getting my views from reading, I tend to stay away from theory.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": -10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "There's no need to let others influence my opinions; I can decide what's right by myself.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": -10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Beliefs are intuitive as opposed to being grounded in logic and reason.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": -10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Philosophy and economics are boring and needlessly complex subjects.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": -10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Politics should focus on real-world practically applicable solutions.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "My ideology is currently in implementation/practice somewhere.",
+        "yesno": true,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I disagree with many political positions based on how they are simply impractical, unworkable, or impossible.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 10,
+            "real": 0,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I don't give credence or validation to \"ideologies\" that I know would make society collapse if one were to try to implement them.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Anything that couldn't possibly work in the real world, and/or isn't even meant to work in the real world, is not a real ideology.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "We should put our effort towards solving real problems, not dreaming up ideal worlds, idealism is naïve.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "There are whole communities that agree with my ideology, it's not far-fetched at all.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "My ideology belongs into far future or far past, modern humanity is not ready for it.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": -10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "There's no use trying to implement my ideology in the real world.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": -10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I prefer imagination over revolution or reform.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": -10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I have a self-insert; a personal unique ideology that I believe in, which is different from pre-existing ideologies.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": -10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I will not compromise in my politics.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": -10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "We should not dismiss things as \"utopian;\" dreams should be chased.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": -10,
+            "perc": 0,
+            "horn": 0
+        }
+    },
+    {
+        "question": "People in our community look up to me and respect me.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 10,
+            "horn": 0
+        }
+    },
+    {
+        "question": "When we rank members of our community according to personal opinion, others usually put me at the top of those lists.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 10,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I often see positive things being said about me online.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 10,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Generally, I have relatively few enemies within our community.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 10,
+            "horn": 0
+        }
+    },
+    {
+        "question": "If people tried to ban me or advocate for my removal, many more would come to my aid and oppose that.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 10,
+            "horn": 0
+        }
+    },
+    {
+        "question": "People see me as the incarnation of evil.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": -10,
+            "horn": 0
+        }
+    },
+    {
+        "question": "If I were to check what people in our community are saying about me, I would see a lot of negative comments and discussion of past incidents/mistakes.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": -10,
+            "horn": 0
+        }
+    },
+    {
+        "question": "I find myself often the target of insults and threats.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": -10,
+            "horn": 0
+        }
+    },
+    {
+        "question": "If I left the community, I would not be missed.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": -10,
+            "horn": 0
+        }
+    },
+    {
+        "question": "People tell me that I'm annoying.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": -10,
+            "horn": 0
+        }
+    },
+    {
+        "question": "Suggestive jokes and innuendos can be funny!",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 10
+        }
+    },
+    {
+        "question": "Moderation is too strict on risqué content.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 10
+        }
+    },
+    {
+        "question": "People overreact to \"inappropriate\" remarks about community members.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 10
+        }
+    },
+    {
+        "question": "We should have an NSFW space or section in our community.",
+        "yesno": true,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 10
+        }
+    },
+    {
+        "question": "I believe in libertine principles and I may be seen as hedonistic.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": 10
+        }
+    },
+    {
+        "question": "Prostitution is not valid, it is immoral or exploitative.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": -10
+        }
+    },
+    {
+        "question": "People are too degenerate online.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": -10
+        }
+    },
+    {
+        "question": "Lewd content should be banned.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": -10
+        }
+    },
+    {
+        "question": "People should *not* post obscene material or engage in adult-oriented discussions.",
+        "yesno": false,
+        "short": true,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": -10
+        }
+    },
+    {
+        "question": "Reproductive organs and other indecent parts should not be mentioned.",
+        "yesno": false,
+        "short": false,
+        "effect": {
+            "dmnr": 0,
+            "pers": 0,
+            "judg": 0,
+            "polt": 0,
+            "real": 0,
+            "perc": 0,
+            "horn": -10
+        }
+    }
+]

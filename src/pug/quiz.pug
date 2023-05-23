@@ -1,0 +1,18 @@
+doctype html
+html
+    include includes/head
+    body
+        h1=config.title
+        h2(style="text-align:center;" id="question-number") Loading...
+        p(class="question" id="question-text") 
+        button(class="button" id="button-stag") &nbsp
+        button(class="button" id="button-ag") Partially Agree
+        button(class="button" id="button-neut") Neutral
+        button(class="button" id="button-disag") Partially Disagree
+        button(class="button" id="button-stdisag") &nbsp
+        div
+            button(class="small-button" id="back-button") Back
+        if js
+            script(type="module") !{js.quiz}
+        else
+            script(type="module" src="./dist/quiz.js")

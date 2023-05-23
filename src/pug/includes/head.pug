@@ -1,0 +1,17 @@
+head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title=config.title
+    link(rel="icon" type="x-icon" href="./assets/icon.png")
+    link(rel="shortcut icon" type="x-icon" href="./assets/icon.png")
+    meta(name="theme-color" content="#000000" data-react-helmet="true")
+    meta(property="og:ttl" content="600")
+    meta(property="og:type" content="website")
+    meta(property="og:site_name" content=config.url)
+    meta(property="og:url" content=`:https://${config.url}`)
+    meta(property="og:title" content=config.title)
+    meta(property="og:description" content=config.desc)
+    meta(property="og:image" content=`https://${config.url}/assets/icon.png`)
+    meta(property="og:image:width" content="250")
+    meta(property="og:image:height" content="250")
+    link(href="./dist/style.css" rel="stylesheet" type="text/css")

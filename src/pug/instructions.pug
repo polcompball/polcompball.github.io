@@ -1,0 +1,33 @@
+doctype html
+html
+    include includes/head
+    body
+        h1=config.title
+        h2(style="text-align:center;") Instructions
+        p(class="question")
+            | You will be presented with a series of statements. For each one, click the button with your opinion on it. Now, choose a version of the text to take.
+        button(
+            class="button"
+            id="longqr-button"
+            onclick="location.href='quiz.html?r';"
+        )="Full Version (Shuffled) (" + longq + " Questions)"
+        button(
+            class="button"
+            id="shortqr-button"
+            onclick="location.href='quiz.html?sr';"
+        )="Short Version (Shuffled) (" + shortq + " Questions)"
+        button(
+            class="button"
+            id="longq-button"
+            onclick="location.href='quiz.html';"
+        )="Full Version (Ordered By Value) (" + longq + " Questions)"
+        button(
+            class="button"
+            id="shortq-button"
+            onclick="location.href='quiz.html?s';"
+        )="Short Version (Ordered By Value) (" + shortq + " Questions)"
+        button(
+            class="button"
+            onclick="location.href='index.html';"
+            id="nevermind-button"
+        )="Wait, nevermind!"

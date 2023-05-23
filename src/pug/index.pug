@@ -1,0 +1,57 @@
+doctype html
+html
+    include includes/head
+    body
+        a(
+            href="https://github.com/pcbvalues/pcbvalues.github.io"
+            class="github-corner"
+            aria-label="View source on Github"
+            )
+            include includes/github.svg
+        h1=config.title
+        - const capitalize = function(name) {
+        -     return name.slice(0,1).toUpperCase() + name.slice(1);
+        - }
+        div(class="center")
+            each val, index in config.values
+                div(class="block")
+                    div(class="axis-label")=capitalize(val.name)
+                    a(href="#anchor" + (index+1))
+                        img(class=collumn src="./assets/values/" + val.icons[0])
+                    a(href="#anchor" + (index+1))
+                        img(class=collumn src="./assets/values/" + val.icons[1])
+        button(
+            class="button"
+            onclick="location.href='instructions.html';"
+            id="start-button"
+            )="Start the Test!"
+        h2="There are 14 values"
+        div(class="expl-block")
+            each val, index in config.values
+                div(class="spacer")
+                    div(class="expl-left")
+                        p(class="value")
+                            b(style=`color: ${val.color[0]};`)=capitalize(val.labels[0])
+                        p(class="expl-text-left")=val.desc[0]
+                    div(class="expl-axis")
+                        a(id="anchor" + (index+1))
+                        p(class="axis")=capitalize(val.name)
+                        include includes/arrow.svg
+                    div(class="expl-right")
+                        p(class="value")
+                            b(style=`color: ${val.color[1]};`)=capitalize(val.labels[1])
+                        p(class="expl-text-right")=val.desc[1]
+        h2="Community Links"
+        p(class="extras")
+            a(href=config.discord_url)="Discord Server"
+        p(class="extras")
+            a(href="./gallery.html")="User Matches"
+        p(class="extras")
+            a(href="./credits.html")= "Credits"
+        p(class="extras") 
+            a(href="https://polcompballvalues.github.io/legacy/")= "Polcompballvalues V1 (Original Version of test)"
+        p(class="extras")
+            a(href="https://polcompballvalues.github.io/")= "Polcompballvalues V2 (Old Version of test)"
+
+
+            
