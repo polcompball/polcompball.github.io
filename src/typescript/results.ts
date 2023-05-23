@@ -23,6 +23,8 @@ function setBarValue(name: string, value: number, right: boolean): void {
         outer.style[`borderTop${side}Radius`] = "28pt";
         outer.style[`borderBottom${side}Radius`] = "28pt";
         outer.style[`margin${side}`] = "4px";
+        const separator = outer.parentElement?.querySelector(".divider") as HTMLDivElement;
+        if (separator) separator.style.display = "none";
     }
 }
 

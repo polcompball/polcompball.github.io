@@ -60,7 +60,7 @@ class Quiz {
         );
 
         const finalScores = maxScores.map(
-            (m, i) => (100 * (m + rawScores[i]) / (2 * m))
+            (m, i) => Math.abs(100 * (m + rawScores[i]) / (2 * m))
         );
 
         if (finalScores.some(x => x > 100 || x < 0 || isNaN(x))) {
