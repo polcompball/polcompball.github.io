@@ -55,7 +55,7 @@ function capitalize(input: string): string {
 }
 
 export class Canvas {
-    private ctx: CanvasRenderingContext2D;
+    private _ctx: CanvasRenderingContext2D;
     params: CanvasParams;
     constructor(canvas: HTMLCanvasElement, params: CanvasParams) {
         canvas.width = params.width;
@@ -65,33 +65,33 @@ export class Canvas {
         if (!ctx) {
             throw new Error("Failed to get canvas context");
         }
-        this.ctx = ctx;
+        this._ctx = ctx;
         this.params = params;
 
-        this.ctx.fillStyle = this.params.bg;
-        this.ctx.fillRect(0, 0, this.params.width, this.params.height);
+        this._ctx.fillStyle = this.params.bg;
+        this._ctx.fillRect(0, 0, this.params.width, this.params.height);
     }
 
     private _drawValueBg(height: number): void {
-        this.ctx.strokeStyle = "#000";
-        this.ctx.lineJoin = "round";
-        this.ctx.lineWidth = 75;
-        this.ctx.fillStyle = "#222222";
-        this.ctx.strokeRect(165, 50 + height, 470, 0);
+        this._ctx.strokeStyle = "#000";
+        this._ctx.lineJoin = "round";
+        this._ctx.lineWidth = 75;
+        this._ctx.fillStyle = "#222222";
+        this._ctx.strokeRect(165, 50 + height, 470, 0);
     }
 
     private _drawHalfCircle(x: number, y: number, r: number, color: string, reverse: boolean): void {
         const [s, e] = reverse ? [1.5, 0.5] : [0.5, 1.5];
-        this.ctx.fillStyle = color;
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, r, s * Math.PI, e * Math.PI);
-        this.ctx.fill();
+        this._ctx.fillStyle = color;
+        this._ctx.beginPath();
+        this._ctx.arc(x, y, r, s * Math.PI, e * Math.PI);
+        this._ctx.fill();
     }
 
     private _drawScoreRect(value: Value, score: number, index: number): void {
-        this.ctx.lineWidth = 65;
+        this._ctx.lineWidth = 65;
         const height = 220 + index * 120;
-        let [v1, v2] = value.color;
+        const [v1, v2] = value.color;
         const [c1, c2] = score > 98 ? [v1, v1] : score < 2 ? [v2, v2] : [v1, v2];
         //Draw ends
         this._drawHalfCircle(166, height, 32, c1, false);
@@ -100,14 +100,14 @@ export class Canvas {
         const extra = score > 98 || score < 2 ? 6 : 0;
         const gap = Math.max(Math.min(score, 98), 2) - 2;
         const ratio = 4.82 * gap;
-        this.ctx.fillStyle = c1;
-        this.ctx.fillRect(166, height - 32, ratio + extra, 64);
-        this.ctx.fillStyle = c2;
-        this.ctx.fillRect(172 + ratio, height - 32, (464 - ratio), 64);
+        this._ctx.fillStyle = c1;
+        this._ctx.fillRect(166, height - 32, ratio + extra, 64);
+        this._ctx.fillStyle = c2;
+        this._ctx.fillRect(172 + ratio, height - 32, (464 - ratio), 64);
     }
 
     private _drawScoreLabel(value: Value, score: number, index: number): string {
-        this.ctx.font = `32px '${this.params.font}', sans-serif`;
+        this._ctx.font = `32px '${this.params.font}', sans-serif`;
         const height = index * 120 + 232.5;
 
         if (score == null || score > 100 || score < 0) {
@@ -118,33 +118,33 @@ export class Canvas {
         const whiteLabel = [w & 0b10, w & 0b01];
 
         if (score > 20) {
-            this.ctx.fillStyle = whiteLabel[0] ? "#FFF" : "#000";
-            this.ctx.textAlign = "left";
-            this.ctx.fillText(score.toFixed(1) + "%", 150, height);
+            this._ctx.fillStyle = whiteLabel[0] ? "#FFF" : "#000";
+            this._ctx.textAlign = "left";
+            this._ctx.fillText(score.toFixed(1) + "%", 150, height);
         }
 
 
         if (score < 80) {
-            this.ctx.fillStyle = whiteLabel[1] ? "#FFF" : "#000";
-            this.ctx.textAlign = "right";
-            this.ctx.fillText((100 - score).toFixed(1) + "%", 650, height);
+            this._ctx.fillStyle = whiteLabel[1] ? "#FFF" : "#000";
+            this._ctx.textAlign = "right";
+            this._ctx.fillText((100 - score).toFixed(1) + "%", 650, height);
         }
 
 
-        this.ctx.fillStyle = this.params.fg;
-        this.ctx.textAlign = "center";
-        this.ctx.font = `bold 30px '${this.params.font}', sans-serif`
+        this._ctx.fillStyle = this.params.fg;
+        this._ctx.textAlign = "center";
+        this._ctx.font = `bold 30px '${this.params.font}', sans-serif`
         const name = capitalize(value.name);
         const tier = Canvas.findTier(score, value.tiers);
         const tierName = `${name} Axis: ${tier}`;
-        this.ctx.fillText(tierName, 400, 170 + index * 120, 550);
+        this._ctx.fillText(tierName, 400, 170 + index * 120, 550);
         return tier;
     }
 
     clearFields(): void {
-        this.ctx.fillStyle = this.params.bg;
-        this.ctx.fillRect(126, 130, 550, 1000);
-        this.ctx.fillRect(0, 0, 800, 150);
+        this._ctx.fillStyle = this.params.bg;
+        this._ctx.fillRect(126, 130, 550, 1000);
+        this._ctx.fillRect(0, 0, 800, 150);
     }
 
     async drawValue(value: Value, score: number, index: number, drawImages = true): Promise<string> {
@@ -158,32 +158,32 @@ export class Canvas {
             const [l, r] = await Promise.all(
                 icons.map(loadImage)
             );
-            this.ctx.drawImage(l, 20, height, 100, 100);
-            this.ctx.drawImage(r, 680, height, 100, 100);
+            this._ctx.drawImage(l, 20, height, 100, 100);
+            this._ctx.drawImage(r, 680, height, 100, 100);
         }
         return tier;
     }
 
-    drawHeader(params: Record<string, any>) {
-        this.ctx.fillStyle = this.params.fg
-        this.ctx.font = `700 50px '${this.params.font}', sans-serif`
-        this.ctx.textAlign = "left"
-        this.ctx.fillText("PCBValues", 20, 90)
+    drawHeader(params: Record<string, any>): void {
+        this._ctx.fillStyle = this.params.fg
+        this._ctx.font = `700 50px '${this.params.font}', sans-serif`
+        this._ctx.textAlign = "left"
+        this._ctx.fillText("PCBvalues", 20, 90)
 
-        this.ctx.font = `30px '${this.params.font}', sans-serif`
+        this._ctx.font = `30px '${this.params.font}', sans-serif`
         const user = !params.gallery ?
-            "Closest match: " + params.user : params.user;
-        this.ctx.fillText(user, 20, 130, 480)
+            "Closest Match: " + params.user : params.user;
+        this._ctx.fillText(user, 20, 130, 480)
 
-        this.ctx.textAlign = "right"
-        this.ctx.font = `300 25px '${this.params.font}', sans-serif`
-        this.ctx.fillText("pcbvalues.github.io", 780, 40)
-        this.ctx.fillText(params.version, 780, 70)
-        this.ctx.fillText(params.edition, 780, 100)
+        this._ctx.textAlign = "right"
+        this._ctx.font = `300 25px '${this.params.font}', sans-serif`
+        this._ctx.fillText("pcbvalues.github.io", 780, 40)
+        this._ctx.fillText(params.version, 780, 70)
+        this._ctx.fillText(params.edition, 780, 100)
 
         const date = (new Date()).toLocaleDateString("en-GB");
         const text = `${params.gallery ? "Viewed" : "Taken"} on ${date}`;
-        this.ctx.fillText(text, 780, 130);
+        this._ctx.fillText(text, 780, 130);
     }
 
     static findTier(score: number, tiers: string[]): string {

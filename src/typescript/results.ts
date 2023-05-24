@@ -89,7 +89,6 @@ async function main() {
         [getJson<Value[]>("values"), getJson<Score[]>("users"), windowPromise]
     );
 
-
     const params = new URLSearchParams(location.search);
 
     const
@@ -130,20 +129,20 @@ async function main() {
         font: "Andika"
     }
 
-    document.getElementById("download-button")!.addEventListener("click", () => {
-        Canvas.download(canvasElm);
-    })
-
     const short = edition.toLowerCase().startsWith("s");
 
     const canvas = new Canvas(canvasElm, canvasParams);
     canvas.drawHeader({
         version: globalThis.VERSION,
-        edition: (short ? "short" : "full") + " edition",
+        edition: (short ? "Short" : "Full") + " Edition",
         gallery: false,
         user: closestUser
     });
     await drawScores(canvas, values, parsedScores);
+
+    document.getElementById("download-button")?.addEventListener("click", () => {
+        Canvas.download(canvasElm);
+    });
 }
 
 main().catch((err: Error) => {
