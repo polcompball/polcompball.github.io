@@ -112,7 +112,7 @@
         }
     },
     {
-        "question": "My politics seems to change based on who I'm trolling.",
+        "question": "My politics seem to change based on who I'm trolling.",
         "yesno": false,
         "short": true,
         "effect": {
