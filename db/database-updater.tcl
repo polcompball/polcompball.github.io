@@ -41,11 +41,11 @@ proc parsescores {} {
             $valuearray(4),
             $valuearray(5),
             $valuearray(6)
-            )}
-            set ::title "Added $name to database"
-        }
-        opendb close
+        )}
+        set ::title "Added $name to database"
     }
+    opendb close
+}
 
     proc updatescores {} {
     set rawtext [.c.jsoninput get 1.0 end]
@@ -70,8 +70,8 @@ proc parsescores {} {
         }
         set ::title "Updated $name in database"
     } else {
-    set ::title "$name is not in the database"
-}
+        set ::title "$name is not in the database"
+    }
 }
 
 proc deletescores {} {
@@ -107,7 +107,7 @@ proc createdb {} {
             real real,
             perc real,
             horn real
-            ) }
-        }
-        opendb close
+        ) }
     }
+    opendb close
+}
