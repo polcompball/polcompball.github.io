@@ -118,7 +118,7 @@ function main(questions: Question[], values: Value[], short: boolean, random: bo
     const randQuestions = random ? parsedQuestions.sort(() => 0.5 - Math.random()) : parsedQuestions;
     const quiz = new Quiz(randQuestions, short);
 
-    const elements = keys.map(v => document.getElementById(`button-${v}`)!)
+    const elements = keys.map(v => document.getElementById(`button-${v}`)!);
 
     for (const [i, elm] of elements.entries()) {
         const weight = (2 - i) / 2;

@@ -54,7 +54,8 @@ h2
     font-size: 32pt
     line-height: 32pt
     margin-top: 9pt
-.button
+%button
+    height: 48pt
     border: none
     border-radius: 28pt
     padding: 8pt
@@ -64,19 +65,22 @@ h2
     display: block
     font-size: 18pt
     font-family: inherit
+    text-align: center
     margin: 1% auto
     cursor: pointer
+
+.button
+    @extend %button
+
 .small-button
-    border-radius: 28pt
-    padding: 8pt
+    @extend %button
     width: 10%
     min-width: 100pt
-    text-align: center
-    display: block
     font-size: 14pt
-    margin: 1% auto
-    cursor: pointer
-    border: none
+    height: 38pt
+
+.button-holder
+    height: calc(48pt * 7 + 38pt)  
 li
     font-size: 18pt
 select
@@ -210,12 +214,16 @@ label
         border-radius: 5vw
         padding: 2vw
         margin-bottom: 2vw
+        height: 12vw
     .small-button
         min-width: 17vw
         max-width: 27vw
         font-size: 2.5vw
         border-radius: 5vw
         padding: 2vw
+        height: 8vw
+    .button-holder
+        height: calc(12vw * 7 + 8vw)
     #banner
         width: 90%
         border-radius: 4vw

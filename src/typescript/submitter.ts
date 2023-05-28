@@ -67,7 +67,7 @@ function getUrlParams(): [e: string, d: string, v: string] {
     const digest = decodeURIComponent(urlParams.get("digest") ?? "missing");
     const rawVals = decodeURIComponent(urlParams.get("score") ?? "missing");
 
-    return [edition, digest, rawVals]
+    return [edition, digest, rawVals];
 }
 
 async function sendScores(userName: string): Promise<void> {
@@ -82,7 +82,7 @@ async function sendScores(userName: string): Promise<void> {
         version: globalThis.VERSION
     };
 
-    const body = JSON.stringify(bodyObj)
+    const body = JSON.stringify(bodyObj);
 
     localStorage.setItem("last-submittion", body);
 
@@ -166,7 +166,7 @@ window.addEventListener("load", () => {
         return;
     }
     const scores = parseScores(getUrlParams()[2], globalThis.SIZE);
-    const match = scores.map((x, i) => x === data[i]).every(x => x);
+    const match = scores.every((x, i) => x === data[i]);
     if (match) {
         alert("You already submitted this score before");
     }

@@ -133,7 +133,7 @@ export class Canvas {
 
         this._ctx.fillStyle = this.params.fg;
         this._ctx.textAlign = "center";
-        this._ctx.font = `bold 30px '${this.params.font}', sans-serif`
+        this._ctx.font = `bold 30px '${this.params.font}', sans-serif`;
         const name = capitalize(value.name);
         const tier = Canvas.findTier(score, value.tiers);
         const tierName = `${name} Axis: ${tier}`;
@@ -165,21 +165,21 @@ export class Canvas {
     }
 
     drawHeader(params: Record<string, any>): void {
-        this._ctx.fillStyle = this.params.fg
-        this._ctx.font = `700 50px '${this.params.font}', sans-serif`
-        this._ctx.textAlign = "left"
-        this._ctx.fillText("PCBvalues", 20, 90)
+        this._ctx.fillStyle = this.params.fg;
+        this._ctx.font = `700 50px '${this.params.font}', sans-serif`;
+        this._ctx.textAlign = "left";
+        this._ctx.fillText("PCBvalues", 20, 90);
 
-        this._ctx.font = `30px '${this.params.font}', sans-serif`
+        this._ctx.font = `30px '${this.params.font}', sans-serif`;
         const user = !params.gallery ?
             "Closest Match: " + params.user : params.user;
-        this._ctx.fillText(user, 20, 130, 480)
+        this._ctx.fillText(user, 20, 130, 480);
 
-        this._ctx.textAlign = "right"
-        this._ctx.font = `300 25px '${this.params.font}', sans-serif`
-        this._ctx.fillText("pcbvalues.github.io", 780, 40)
-        this._ctx.fillText(params.version, 780, 70)
-        this._ctx.fillText(params.edition, 780, 100)
+        this._ctx.textAlign = "right";
+        this._ctx.font = `300 25px '${this.params.font}', sans-serif`;
+        this._ctx.fillText("pcbvalues.github.io", 780, 40);
+        this._ctx.fillText(params.version, 780, 70);
+        this._ctx.fillText(params.edition, 780, 100);
 
         const date = (new Date()).toLocaleDateString("en-GB");
         const text = `${params.gallery ? "Viewed" : "Taken"} on ${date}`;

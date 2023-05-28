@@ -56,7 +56,7 @@ async function main(): Promise<void> {
         height: 1000,
         width: 800,
         font: "Andika"
-    }
+    };
 
     const canvasElm = <HTMLCanvasElement>document.getElementById("banner");
     const canvas = new Canvas(canvasElm, params);
@@ -67,7 +67,7 @@ async function main(): Promise<void> {
     dropDown.addEventListener("change", () => {
         const i = dropDown.selectedIndex;
         drawScores(canvas, users[i], values);
-    })
+    });
 }
 
 main().catch((err: Error) => {

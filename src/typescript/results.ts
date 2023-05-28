@@ -1,4 +1,4 @@
-import { getJson, Canvas, windowPromise, parseScores, currentTheme } from "./common.js"
+import { getJson, Canvas, windowPromise, parseScores, currentTheme } from "./common.js";
 import type { Value, Score, CanvasParams } from "./types";
 
 declare global {
@@ -60,7 +60,7 @@ function addClosestMatches(users: Score[]): string {
         const userName = users[i]?.name ?? "Missing";
 
         const elm = document.createElement("p");
-        elm.textContent = `${userName}: ${bias.toFixed(1)}%`
+        elm.textContent = `${userName}: ${bias.toFixed(1)}%`;
 
         otherMatches?.appendChild(elm);
     }
@@ -69,7 +69,7 @@ function addClosestMatches(users: Score[]): string {
 
 async function drawScores(canvas: Canvas, values: Value[], scores: number[]): Promise<void> {
     for (const [i, value] of values.entries()) {
-        const { labels, color, white } = value;
+        const { labels } = value;
 
         const score = scores[i];
         const revScore = 100 - score;
@@ -127,7 +127,7 @@ async function main() {
         height: 1000,
         width: 800,
         font: "Andika"
-    }
+    };
 
     const short = edition.toLowerCase().startsWith("s");
 
