@@ -4,6 +4,11 @@ import { Question, Value } from "./types";
 const questionNumber = <HTMLHeadingElement>document.getElementById("question-number")!;
 const questionText = <HTMLParagraphElement>document.getElementById("question-text")!;
 
+function storeTime(hash: string): void {
+    const now = new Date();
+    localStorage.setItem(hash, now.toISOString());
+}
+
 class Quiz {
     private _index: number;
     private _questions: Question[];
@@ -71,10 +76,13 @@ class Quiz {
         const scoreBytes = (new TextEncoder).encode(scoreStr);
         const scoreDigest = await crypto.subtle.digest("SHA-512", scoreBytes);
         const digestStr = String.fromCharCode(... new Uint8Array(scoreDigest));
+        const b64Digest = btoa(digestStr);
+
+        storeTime(b64Digest);
 
         const params = new URLSearchParams([
             ["score", scoreStr],
-            ["digest", btoa(digestStr)],
+            ["digest", b64Digest],
             ["edition", this._short ? "s" : "f"]
         ]);
         return `results.html?${params}`;

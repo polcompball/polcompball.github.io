@@ -60,14 +60,29 @@ function checkUsername(userName: string): string {
     }
 }
 
-function getUrlParams(): [e: string, d: string, v: string] {
+function decodeParams(urlParams: URLSearchParams, param: string): string | null {
+    const found = urlParams.get(param);
+    if (!found) {
+        return null;
+    }
+    return decodeURIComponent(found);
+}
+
+function getUrlParams(): [e: string | null, d: string | null, v: string | null] {
     const urlParams = new URLSearchParams(location.search);
 
-    const edition = urlParams.get("edition") ?? "missing";
-    const digest = decodeURIComponent(urlParams.get("digest") ?? "missing");
-    const rawVals = decodeURIComponent(urlParams.get("score") ?? "missing");
+    const edition = decodeParams(urlParams, "edition");
+    const digest = decodeParams(urlParams, "digest");
+    const rawVals = decodeParams(urlParams, "score");
 
     return [edition, digest, rawVals];
+}
+
+function getAnswerTime(hash: string | null): string | null {
+    if (!hash) {
+        return null;
+    }
+    return localStorage.getItem(hash);
 }
 
 async function sendScores(userName: string): Promise<void> {
@@ -77,6 +92,7 @@ async function sendScores(userName: string): Promise<void> {
     const bodyObj = {
         name: userName,
         vals: parseScores(urlParams[2], globalThis.SIZE),
+        time: getAnswerTime(urlParams[1]),
         edition: urlParams[0],
         digest: urlParams[1],
         version: globalThis.VERSION
@@ -157,17 +173,22 @@ document.getElementById("send-button")?.addEventListener("click", () => {
 });
 
 window.addEventListener("load", () => {
-    const lastSub = localStorage.getItem("last-submittion");
-    if (!lastSub) {
-        return;
-    }
-    const data = JSON.parse(lastSub).vals as number[];
-    if (!data) {
-        return;
-    }
-    const scores = parseScores(getUrlParams()[2], globalThis.SIZE);
-    const match = scores.every((x, i) => x === data[i]);
-    if (match) {
-        alert("You already submitted this score before");
+    try {
+        const lastSub = localStorage.getItem("last-submittion");
+        if (!lastSub) {
+            return;
+        }
+        const data = JSON.parse(lastSub).vals as number[];
+        if (!data) {
+            return;
+        }
+        const scores = parseScores(getUrlParams()[2], globalThis.SIZE);
+        const match = scores.every((x, i) => x === data[i]);
+        if (match) {
+            alert("You already submitted this score before");
+        }
+    } catch (e: unknown) {
+        console.error(e);
+        alert(String(e));
     }
 });

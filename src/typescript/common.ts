@@ -27,7 +27,10 @@ export async function getJson<T>(path: Jsons): Promise<T> {
     return resp.json() as T;
 }
 
-export function parseScores(scoreString: string, count: number): number[] {
+export function parseScores(scoreString: string | null, count: number): number[] {
+    if (!scoreString) {
+        throw new Error("Invalid Scores");
+    }
     const decoded = decodeURIComponent(scoreString);
     const numberScores = decoded.split(",").map(x => parseFloat(x));
 
