@@ -87,14 +87,13 @@ function getAnswerTime(hash: string | null): string | null {
 
 async function sendScores(userName: string): Promise<void> {
 
-    const urlParams = getUrlParams();
+    const [edition, digest, values] = getUrlParams();
 
     const bodyObj = {
         name: userName,
-        vals: parseScores(urlParams[2], globalThis.SIZE),
-        time: getAnswerTime(urlParams[1]),
-        edition: urlParams[0],
-        digest: urlParams[1],
+        vals: parseScores(values, globalThis.SIZE),
+        time: getAnswerTime(digest),
+        edition, digest,
         version: globalThis.VERSION
     };
 
@@ -122,15 +121,18 @@ async function sendScores(userName: string): Promise<void> {
     player.play();
 
     const res = await fetch(globalThis.API_URL, params);
+
+    clearTimeout(timeOut);
+
+    if (res.status > 299) {
+        throw new Error("Server returned error response");
+    }
+
     const data = await res.json();
 
     if (!data.success) {
         throw new Error("Failed to submit scores");
     }
-
-    count++;
-    clearTimeout(timeOut);
-    playAnimation("success");
 }
 
 function sendMessage(): void {
@@ -151,13 +153,19 @@ function sendMessage(): void {
     }
     sendScores(userName)
         .then(() => {
-            lock = false;
+            count++;
+            playAnimation("success");
         })
         .catch((err: Error) => {
-            lock = false;
             console.error(err);
+
             const scores = localStorage.getItem("last-submittion");
+            localStorage.removeItem("last-submittion");
+
             playAnimation("failure", scores);
+        })
+        .finally(() => {
+            lock = false;
         });
 }
 
