@@ -1,5 +1,5 @@
 type Jsons = "questions" | "users" | "values";
-import type { Value, CanvasParams } from "./types"
+import type { Value, CanvasParams, HeaderParams } from "./types"
 
 export const windowPromise = new Promise<void>(
     res => {
@@ -29,7 +29,7 @@ export async function getJson<T>(path: Jsons): Promise<T> {
 
 export function parseScores(scoreString: string | null, count: number): number[] {
     if (!scoreString) {
-        throw new Error("Invalid Scores");
+        throw new Error("No scores provided");
     }
     const decoded = decodeURIComponent(scoreString);
     const numberScores = decoded.split(",").map(x => parseFloat(x));
@@ -167,7 +167,7 @@ export class Canvas {
         return tier;
     }
 
-    drawHeader(params: Record<string, any>): void {
+    drawHeader(params: HeaderParams): void {
         this._ctx.fillStyle = this.params.fg;
         this._ctx.font = `700 50px '${this.params.font}', sans-serif`;
         this._ctx.textAlign = "left";
@@ -185,7 +185,7 @@ export class Canvas {
         this._ctx.fillText(params.edition, 780, 100);
 
         const date = (new Date()).toLocaleDateString("en-GB");
-        const text = `${params.gallery ? "Viewed" : "Taken"} on ${date}`;
+        const text = `${params.basetext} on ${date}`;
         this._ctx.fillText(text, 780, 130);
     }
 

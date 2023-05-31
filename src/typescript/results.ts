@@ -28,8 +28,8 @@ function setBarValue(name: string, value: number, right: boolean): void {
     }
 }
 
-function orderScores(score: number[], users: Score[]): Score[] {
-    const ordered = [] as Score[];
+function orderScores(score: number[], users: Score[]): Required<Score>[] {
+    const ordered = [] as Required<Score>[];
 
     const weights = [1, 1, 1, 0.5, 0.5, 0, 1];
     const weightSum = weights.reduce((pv, cv) => pv + cv, 0);
@@ -39,7 +39,7 @@ function orderScores(score: number[], users: Score[]): Score[] {
         for (const [i, stat] of user.stats.entries()) {
             const weight = weights[i] ?? 1;
             const delta = Math.abs(score[i] - stat);
-            sum += ((delta / 100) * weight) ** 3;
+            sum += ((delta / 100) * weight) ** 2;
         }
         ordered.push({
             ...user,
@@ -47,12 +47,12 @@ function orderScores(score: number[], users: Score[]): Score[] {
         });
     }
 
-    return ordered.sort((a, b) => a.bias! - b.bias!);
+    return ordered.sort((a, b) => a.bias - b.bias);
 }
 
 
-function addClosestMatches(users: Score[]): string {
-    const matchBias = (1 - (users[0]?.bias ?? 1)) * 100;
+function addClosestMatches(users: Required<Score>[]): string {
+    const matchBias = (1 - users[0].bias) * 100;
 
     document.getElementById("cmatch")!.textContent =
         `${users[0].name}: ${matchBias.toFixed(1)}%`;
@@ -60,11 +60,10 @@ function addClosestMatches(users: Score[]): string {
     const otherMatches = document.getElementById("other-matches");
 
     for (let i = 1; i < 5; i++) {
-        const bias = (1 - (users[i]?.bias ?? 0)) * 100;
-        const userName = users[i]?.name ?? "Missing";
+        const bias = (1 - users[i].bias) * 100;
 
         const elm = document.createElement("p");
-        elm.textContent = `${userName}: ${bias.toFixed(1)}%`;
+        elm.textContent = `${users[i].name}: ${bias.toFixed(1)}%`;
 
         otherMatches?.appendChild(elm);
     }
@@ -140,7 +139,8 @@ async function main() {
         version: globalThis.VERSION,
         edition: (short ? "Short" : "Full") + " Edition",
         gallery: false,
-        user: closestUser
+        user: closestUser,
+        basetext: "Taken"
     });
     await drawScores(canvas, values, parsedScores);
 

@@ -27,3 +27,11 @@ export type CanvasParams = {
     width: number;
     font: string;
 }
+
+export type HeaderParams = {
+    version: string;
+    edition: string;
+    gallery: boolean;
+    user: string;
+    basetext: string;
+}

@@ -91,7 +91,7 @@ class Quiz {
 
 function renderQuestion(quiz: Quiz, elements: HTMLElement[]): void {
     questionNumber.textContent = `Question ${quiz.index} of ${quiz.size}`;
-    questionText.innerHTML = quiz.text;
+    questionText.textContent = quiz.text;
     for (const [i, elm] of elements.entries()) {
         if (quiz.yesno) {
             switch (i) {

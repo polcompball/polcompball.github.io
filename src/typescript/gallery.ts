@@ -16,7 +16,8 @@ function drawScores(canvas: Canvas, score: Score, values: Value[], images = fals
         version: globalThis.VERSION,
         edition: "User Gallery",
         gallery: true,
-        user: score.name
+        user: score.name,
+        basetext: "Viewed"
     });
 
     const [fg, bg] = getColorScheme();
@@ -31,7 +32,7 @@ function drawScores(canvas: Canvas, score: Score, values: Value[], images = fals
 }
 
 function prepareDropdown(dropDown: HTMLSelectElement, users: Score[]): void {
-    const createOption = (user: Score, index: number) => {
+    const createOption = (user: Score, index: number): HTMLOptionElement => {
         const option = document.createElement("option");
         option.value = index.toFixed();
         option.textContent = user.name;
