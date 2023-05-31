@@ -31,15 +31,19 @@ function setBarValue(name: string, value: number, right: boolean): void {
 function orderScores(score: number[], users: Score[]): Score[] {
     const ordered = [] as Score[];
 
+    const weights = [1, 1, 1, 0.5, 0.5, 0, 1];
+    const weightSum = weights.reduce((pv, cv) => pv + cv, 0);
+
     for (const user of users) {
         let sum = 0;
         for (const [i, stat] of user.stats.entries()) {
+            const weight = weights[i] ?? 1;
             const delta = Math.abs(score[i] - stat);
-            sum += (delta / 100) ** 3;
+            sum += ((delta / 100) * weight) ** 3;
         }
         ordered.push({
             ...user,
-            bias: sum / user.stats.length
+            bias: sum / weightSum
         });
     }
 
