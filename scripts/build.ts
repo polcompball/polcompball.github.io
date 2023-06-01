@@ -194,11 +194,13 @@ async function writeJSON(obj: Record<string, any>): Promise<void> {
 
 async function main(): Promise<void> {
     const dataObjs = await loadData();
+    console.info(`${Object.keys(dataObjs).length} data objects loaded`);
     let JSObj: Record<string, string> | null = null;
 
     if (params.minify) {
         const jsDir = await fs.readdir(params.jsDir);
         JSObj = await minifyAll(jsDir);
+        console.info(`${Object.keys(JSObj).length} JavaScript files minified`);
     }
 
     const keys = dataObjs?.config.values.map((x: any) => x.key) as string[];
@@ -206,6 +208,7 @@ async function main(): Promise<void> {
     if (params.pasedb) {
         const users = await loadScores(keys);
         dataObjs.users = users.sort((a, b) => a.name.localeCompare(b.name));
+        console.info(`${users.length} user scores loaded from database`);
     }
 
     const dataConfig = {
@@ -218,9 +221,9 @@ async function main(): Promise<void> {
     };
 
     await renderTemplates(dataConfig);
-
+    console.info("Templates rendered");
     await writeJSON(dataObjs);
-
+    console.info("Configuration files written");
 }
 
 main().catch(

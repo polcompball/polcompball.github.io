@@ -10,6 +10,7 @@ const whitelist = ["common.min.js"];
 
 async function main(): Promise<void> {
     const dir = await fs.readdir(deleteDir);
+    let count = 0;
     for (const file of dir) {
         if (whitelist.includes(file)) {
             continue;
@@ -18,8 +19,10 @@ async function main(): Promise<void> {
         if (deleteExt.includes(ext)) {
             const fname = deleteDir + file;
             await fs.unlink(fname);
+            count++;
         }
     }
+    console.info(`${count} files deleted`);
 }
 
 main().catch(

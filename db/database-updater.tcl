@@ -47,7 +47,7 @@ proc parsescores {} {
     opendb close
 }
 
-    proc updatescores {} {
+proc updatescores {} {
     set rawtext [.c.jsoninput get 1.0 end]
     set data [::json::json2dict $rawtext]
     set name [dict get $data name]
