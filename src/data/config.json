@@ -16,7 +16,7 @@
                 "irony.svg"
             ],
             "color": [
-                "#204F95",
+                "#417CB1",
                 "#FFFFFF"
             ],
             "white_label": [
@@ -300,7 +300,7 @@
             "elms": [
                 {
                     "name": "AquaHeart (Sincerity)",
-                    "color": "204F95"
+                    "color": "417CB1"
                 },
                 {
                     "name": "jao (Irony)",
