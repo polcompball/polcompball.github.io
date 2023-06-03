@@ -55,7 +55,7 @@ h2
     line-height: 32pt
     margin-top: 9pt
 %button
-    height: 48pt
+    height: fit-content
     border: none
     border-radius: 28pt
     padding: 8pt
@@ -93,9 +93,14 @@ select
     background-color: #CCC
     border-radius: 24pt
     padding: 5vw
-    *
+    li
         max-width: 92%
+        word-wrap: break-word
         margin: auto
+    b.credit-label
+        max-width: 92%
+        font-size: larger
+
 #banner
     border: none
     border-radius: 32pt
@@ -125,6 +130,7 @@ select
     border: none
 label
     font-size: 24pt
+
 
 //index
 #start-button
@@ -214,14 +220,14 @@ label
         border-radius: 5vw
         padding: 2vw
         margin-bottom: 2vw
-        height: 12vw
+        height: fit-content
     .small-button
         min-width: 17vw
         max-width: 27vw
         font-size: 2.5vw
         border-radius: 5vw
         padding: 2vw
-        height: 8vw
+        height: fit-content
     .button-holder
         height: calc(12vw * 7 + 8vw)
     #banner
@@ -236,3 +242,8 @@ label
         padding-right: 15%
     #name
         font-size: 6vw
+    #credits
+        b.credit-label
+            font-size: 7vw
+        li
+            font-size: 5vw
