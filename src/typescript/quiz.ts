@@ -44,7 +44,7 @@ class Quiz {
     }
 
     previousQuestion(): boolean {
-        return --this._index > 0;
+        return this._index-- > 0;
     }
 
     async getScores(): Promise<string> {
