@@ -546,7 +546,7 @@
         }
     },
     {
-        "question": "Not all groups are equal, some commit more crime, some work harder than others.",
+        "question": "It's acceptable to value some people less because they are part of a group that commits more crime on average.",
         "yesno": false,
         "short": true,
         "effect": {
@@ -1106,7 +1106,7 @@
         }
     },
     {
-        "question": "Prostitution is not valid, it is immoral or exploitative.",
+        "question": "",
         "yesno": false,
         "short": false,
         "effect": {
@@ -1134,7 +1134,7 @@
         }
     },
     {
-        "question": "Lewd content should be banned.",
+        "question": "Lewd content should be banned from our community.",
         "yesno": false,
         "short": true,
         "effect": {
