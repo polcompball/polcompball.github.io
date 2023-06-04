@@ -476,7 +476,7 @@
         }
     },
     {
-        "question": "We should allow discussion of eugenics as a legitimate tool to be used.",
+        "question": "We should allow discussions that paint eugenics/gene editing as a useful tool.",
         "yesno": false,
         "short": true,
         "effect": {
