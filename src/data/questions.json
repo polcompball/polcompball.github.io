@@ -476,7 +476,7 @@
         }
     },
     {
-        "question": "In the modern era, eugenics is a legitimate topic of discussion.",
+        "question": "We should allow discussion of eugenics as a legitimate tool to be used.",
         "yesno": false,
         "short": true,
         "effect": {
