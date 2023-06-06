@@ -476,7 +476,7 @@
         }
     },
     {
-        "question": "In the modern era, eugenics is a legitimate topic of discussion.",
+        "question": "We should allow pro-eugenics views in our discussions.",
         "yesno": false,
         "short": true,
         "effect": {
@@ -546,7 +546,7 @@
         }
     },
     {
-        "question": "Not all groups are equal, some commit more crime, some work harder than others.",
+        "question": "It's acceptable to value some people less because they are part of a group that commits more crime on average.",
         "yesno": false,
         "short": true,
         "effect": {
@@ -1106,8 +1106,8 @@
         }
     },
     {
-        "question": "Prostitution is not valid, it is immoral or exploitative.",
-        "yesno": false,
+        "question": "I oppose prostitution.",
+        "yesno": true,
         "short": false,
         "effect": {
             "dmnr": 0,
@@ -1134,7 +1134,7 @@
         }
     },
     {
-        "question": "Lewd content should be banned.",
+        "question": "Lewd content should be banned from our community.",
         "yesno": false,
         "short": true,
         "effect": {
