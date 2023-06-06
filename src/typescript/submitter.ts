@@ -85,6 +85,12 @@ function getAnswerTime(hash: string | null): string | null {
     return localStorage.getItem(hash);
 }
 
+function totalTakes(): number {
+    const size = localStorage.length;
+    const last = localStorage.getItem("last-submittion");
+    return last ? size - 1 : size;
+}
+
 async function sendScores(userName: string): Promise<void> {
 
     const [edition, digest, values] = getUrlParams();
@@ -94,6 +100,7 @@ async function sendScores(userName: string): Promise<void> {
         vals: parseScores(values, globalThis.SIZE),
         time: getAnswerTime(digest),
         edition, digest,
+        takes: totalTakes(),
         version: globalThis.VERSION
     };
 
