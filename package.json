@@ -1,6 +1,6 @@
 {
   "name": "pcbvalues.github.io",
-  "version": "3.0.11",
+  "version": "3.0.12",
   "main": "index.html",
   "scripts": {
     "build": "tsc && sass ./src/scss/style.sass ./dist/style.css && node --loader ts-node/esm ./scripts/build.ts --parsedb",
@@ -14,14 +14,14 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
-    "@types/node": "^20.2.1",
+    "@types/node": "^20.3.2",
     "@types/pug": "^2.0.6",
     "pug": "^3.0.2",
-    "sass": "^1.62.1",
-    "sqlite": "^4.2.0",
+    "sass": "^1.63.6",
+    "sqlite": "^4.2.1",
     "sqlite3": "^5.1.6",
-    "terser": "^5.17.4",
+    "terser": "^5.18.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   }
 }
