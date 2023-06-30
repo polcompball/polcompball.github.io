@@ -135,14 +135,10 @@ async function sendScores(userName: string): Promise<void> {
 
     clearTimeout(timeOut);
 
-    if (res.status > 299) {
-        throw new Error("Server returned error response");
-    }
-
     const data = await res.json();
 
-    if (!data.success) {
-        throw new Error("Failed to submit scores");
+    if (res.status > 299 || !data.success) {
+        throw new Error(`Failed to submit scores: ${data.error}`);
     }
 }
 
@@ -193,15 +189,19 @@ document.getElementById("send-button")?.addEventListener("click", () => {
 
 window.addEventListener("load", () => {
     try {
+        //JSON version of the last submitted score
         const lastSub = localStorage.getItem("last-submittion");
         if (!lastSub) {
             return;
         }
+        //Parsed version of the last submited score's values
         const data = JSON.parse(lastSub).vals as number[];
         if (!data) {
             return;
         }
+        //Current URL parameters' scores
         const scores = parseScores(getUrlParams()[2], globalThis.SIZE);
+        //Check if they all match to the last submitted scores
         const match = scores.every((x, i) => x === data[i]);
         if (match) {
             alert("You already submitted this score before");
