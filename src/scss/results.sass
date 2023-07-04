@@ -1,11 +1,12 @@
 button#download-button
     background-color: #05d243
-    
+
 div.axis
     width: 100%
     display: flex
     align-items: center
     justify-content: center
+
     .value
         height: 128px
 
@@ -38,7 +39,6 @@ div.text-wrapper, div.text-wrapper-white
     font-size: 36pt
     line-height: 36pt
     color: #222222
-    
 
 div.text-wrapper-white
     color: #DDDDDD
@@ -68,24 +68,31 @@ div.right-axis
     margin-right: 4px
 
 @media screen and (max-width: 800px)
-    div.results 
+    div.results
         width: 86vw
+
         h2
             width: 100%
-    div.bar 
+
+    div.bar
         height: 4vw
         width: 25vw
+
     div.divider
         display: none
+
     div.axis img.value
         width: 20vw
         height: auto
         margin: 0
+
     div.text-wrapper, div.text-wrapper-white
         font-size: 4vw
         line-height: 4vw
         padding: 0
+
     div.left-axis
         border-right: solid 0.8vw black
+
     div.right-axis
         border-left: solid 0.8vw black

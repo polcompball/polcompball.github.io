@@ -1,5 +1,5 @@
 type Jsons = "questions" | "users" | "values";
-import type { Value, CanvasParams, HeaderParams } from "./types"
+import type { Value, CanvasParams, HeaderParams, Score } from "./types"
 
 export const windowPromise = new Promise<void>(
     res => {
@@ -41,6 +41,10 @@ export function parseScores(scoreString: string | null, count: number): number[]
     }
 
     return numberScores;
+}
+
+export function parseUsers(users: [string, number[]][]): Score[] {
+    return users.map(([name, stats]) => ({ name, stats }));
 }
 
 function loadImage(url: string): Promise<HTMLImageElement> {

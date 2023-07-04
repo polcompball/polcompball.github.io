@@ -1,4 +1,4 @@
-import { Canvas, getJson, currentTheme, windowPromise } from "./common.js";
+import { Canvas, getJson, currentTheme, windowPromise, parseUsers } from "./common.js";
 import type { Value, Score, CanvasParams } from "./types";
 
 declare global {
@@ -47,9 +47,11 @@ function prepareDropdown(dropDown: HTMLSelectElement, users: Score[]): void {
 }
 
 async function main(): Promise<void> {
-    const [values, users, _] = await Promise.all(
-        [getJson<Value[]>("values"), getJson<Score[]>("users"), windowPromise]
+    const [values, rawUsers, _] = await Promise.all(
+        [getJson<Value[]>("values"), getJson<[string, number[]][]>("users"), windowPromise]
     );
+
+    const users = parseUsers(rawUsers);
 
     const [fg, bg] = getColorScheme();
     const params: CanvasParams = {

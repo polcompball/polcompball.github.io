@@ -85,7 +85,7 @@ async function renderTemplates(config: Record<string, any>): Promise<any> {
             const basename = path.parse(file).name;
 
             const html = pug.renderFile(pathName, config as pug.Options);
-            const pHtml = html.replaceAll(/\n/gm, "");
+            const pHtml = html.replaceAll(/\n/gm, "").replaceAll(" = ", "=");
 
             fsPromises.push(
                 fs.writeFile(`./${basename}.html`, pHtml)
@@ -113,16 +113,16 @@ async function loadData(): Promise<Record<string, any>> {
     return dataObjs;
 }
 
-type score = {
-    name: string
+type score = [
+    name: string,
     stats: number[]
-}
+];
 
 function parseScores(scores: Record<string, any>, keys: string[]): score {
     const stats = keys.map(x => scores[x] as number);
     const { name } = scores as Record<string, string>;
 
-    return { name, stats };
+    return [name, stats];
 }
 
 async function loadScores(keys: string[]): Promise<score[]> {
@@ -207,7 +207,7 @@ async function main(): Promise<void> {
 
     if (params.pasedb) {
         const users = await loadScores(keys);
-        dataObjs.users = users.sort((a, b) => a.name.localeCompare(b.name));
+        dataObjs.users = users.sort((a, b) => a[0].localeCompare(b[0]));
         console.info(`${users.length} user scores loaded from database`);
     }
 

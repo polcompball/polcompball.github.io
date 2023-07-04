@@ -17,7 +17,7 @@ You can see the current available user scores in the [user gallery](https://pcbv
 ## How do I get added to the user gallery?
 You can be added by taking the test and selecting the "Submit Your Scores" option at the bottom of the page, this will take you to a page with a text box and a "Send" button, simply enter the name you want to be added as to the test and click the send button.
 
-Alternatively you can send an HTTP POST request to the address [https://pcbval.theghostofinky.repl.co/apiv3/](https://pcbval.theghostofinky.repl.co/apiv3/) with a JSON payload similar to the shown below:
+Alternatively you can send an HTTP POST request to the address <https://scores.pcbvalues.repl.co/apiv3/> with a JSON payload similar to the shown below:
 ```json
 {
     "name" : "Your name",
@@ -35,7 +35,7 @@ Alternatively you can send an HTTP POST request to the address [https://pcbval.t
     ]
 }
 ```
-A successful submition will return a json containing `{"success":true}`, an invalid score or an error submitting the score will return an HTTP error code with the text `{"success":false}`.
+A successful submition will return a json containing `{"success":true}`, an invalid score or an error submitting the score will return an HTTP error code with the text `{"success":false,"error":"your error message"}`.
 
 
 ## Who worked on this test?

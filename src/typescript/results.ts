@@ -1,4 +1,4 @@
-import { getJson, Canvas, windowPromise, parseScores, currentTheme } from "./common.js";
+import { getJson, Canvas, windowPromise, parseScores, currentTheme, parseUsers } from "./common.js";
 import type { Value, Score, CanvasParams } from "./types";
 
 declare global {
@@ -88,10 +88,11 @@ async function drawScores(canvas: Canvas, values: Value[], scores: number[]): Pr
 
 
 async function main() {
-    const [values, users, _] = await Promise.all(
-        [getJson<Value[]>("values"), getJson<Score[]>("users"), windowPromise]
+    const [values, rawUsers, _] = await Promise.all(
+        [getJson<Value[]>("values"), getJson<[string, number[]][]>("users"), windowPromise]
     );
 
+    const users = parseUsers(rawUsers);
     const params = new URLSearchParams(location.search);
 
     const
