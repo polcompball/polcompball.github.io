@@ -260,7 +260,10 @@
             ]
         }
     ],
-    "api_url": "https://scores.pcbvalues.repl.co/apiv3/",
+    "api_url": "https://pcbvalues.000webhostapp.com/api.php",
+    "discord_url": "https://discord.gg/pyEZttNQYu",
+    "wiki_url": "https://polcompball.wiki",
+    "reddit_url": "https://www.reddit.com/r/Polcompball/",
     "title": "PCBvalues",
     "url": "pcbvalues.github.io",
     "desc": "PCBvalues is a test for what kind of member of the political community you are and what camps you fall into.",

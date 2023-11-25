@@ -2,8 +2,8 @@
 
 ## What is PCBvalues
 [![Reddit](https://img.shields.io/badge/r%2FPolcompball-Reddit-%23FF4500?style=flat&logo=reddit)](https://www.reddit.com/r/Polcompball/)
-[![Wiki](https://img.shields.io/badge/Polcompball-Wiki-%230000?style=flat&logo=wikipedia)](https://polcompball.wiki/wiki/Polcompball_Wiki)
-[![Static Badge](https://img.shields.io/badge/Polcompball-Server-%235865F2?style=flat&logo=discord)
+[![Wiki](https://img.shields.io/badge/Polcompball-Wiki-%230000?style=flat&logo=wikipedia)](https://polcompball.wiki)
+[![Discord](https://img.shields.io/badge/Polcompball-Server-%235865F2?style=flat&logo=discord)
 ](https://discord.gg/pyEZttNQYu)
 
 PCBvalues is a test for what kind of member of the political community you are and what camps you fall into. It is inspired by the personalities of the Polcompball community
@@ -19,7 +19,7 @@ You can see the current available user scores in the [user gallery](https://pcbv
 ## How do I get added to the user gallery?
 You can be added by taking the test and selecting the "Submit Your Scores" option at the bottom of the page, this will take you to a page with a text box and a "Send" button, simply enter the name you want to be added as to the test and click the send button.
 
-Alternatively you can send an HTTP POST request to the address <https://scores.pcbvalues.repl.co/apiv3/> with a JSON payload similar to the shown below:
+Alternatively you can send an HTTP POST request to the address <https://pcbvalues.000webhostapp.com/api.php> with a JSON payload similar to the shown below:
 ```json
 {
     "name" : "Your name",

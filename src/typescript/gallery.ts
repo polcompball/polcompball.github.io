@@ -46,6 +46,17 @@ function prepareDropdown(dropDown: HTMLSelectElement, users: Score[]): void {
     }
 }
 
+function findMachingIndex(scores: Score[], user: string | null): number {
+    if (!user) {
+        return 0;
+    }
+    const parsedName = decodeURIComponent(user);
+
+    const index = scores.findIndex(x => x.name === parsedName);
+
+    return index >= 0 ? index : 0;
+}
+
 async function main(): Promise<void> {
     const [values, rawUsers, _] = await Promise.all(
         [getJson<Value[]>("values"), getJson<[string, number[]][]>("users"), windowPromise]
@@ -64,12 +75,34 @@ async function main(): Promise<void> {
     const canvasElm = <HTMLCanvasElement>document.getElementById("banner");
     const canvas = new Canvas(canvasElm, params);
 
+    const urlParams = new URLSearchParams(location.search);
+    const selectedUser = findMachingIndex(users, urlParams.get("user"));
+
     const dropDown = <HTMLSelectElement>document.getElementById("userdropdown");
     prepareDropdown(dropDown, users);
-    drawScores(canvas, users[0], values, true);
+
+    drawScores(canvas, users[selectedUser], values, true);
+    dropDown.selectedIndex = selectedUser;
+    document.title = `PCBValues - ${users[selectedUser].name}`;
+
     dropDown.addEventListener("change", () => {
-        const i = dropDown.selectedIndex;
-        drawScores(canvas, users[i], values);
+        const index = dropDown.selectedIndex;
+        const name = users[index].name;
+
+        const params = new URLSearchParams({ user: name });
+        const path = `${location.origin}${location.pathname}?${params}`;
+        
+        history.pushState(index, "", path);
+        document.title = `PCBValues - ${name}`;
+        drawScores(canvas, users[index], values);
+    });
+
+    window.addEventListener("popstate", (ev: PopStateEvent) => {
+        const oldUser = ev.state ?? selectedUser as number;
+
+        dropDown.selectedIndex = oldUser;
+        document.title = `PCBValues - ${users[oldUser].name}`;
+        drawScores(canvas, users[oldUser], values);
     });
 }
 

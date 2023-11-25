@@ -2,6 +2,11 @@ import { parseScores } from "./common.js";
 
 type Animate = "success" | "failure";
 
+type APIResponse = {
+    success: boolean;
+    error?: string;
+};
+
 type LottiePlayer = HTMLElement & {
     play: () => void;
     load: (url: string) => void;
@@ -90,9 +95,24 @@ function getAnswerTime(hash: string | null): string | null {
 }
 
 function totalTakes(): number {
-    const size = localStorage.length;
-    const last = localStorage.getItem("last-submittion");
-    return last ? size - 1 : size;
+    return Object.keys(localStorage).filter(x => {
+        if (x.length < 64) {
+            return false;
+        }
+
+        const val = localStorage.getItem(x);
+        if (!val) {
+            return false;
+        }
+
+        try {
+            const dt = new Date(val);
+            //2023-01-01 timestamp
+            return dt.valueOf() > 1_672_531_200;
+        } catch (e: any) {
+            return false;
+        }
+    }).length;
 }
 
 async function sendScores(userName: string): Promise<void> {
@@ -120,7 +140,12 @@ async function sendScores(userName: string): Promise<void> {
     const params: RequestInit = {
         method: "POST",
         headers: {
-            "Content-Type": "application/json; charset=utf-8"
+            //Correct Content-Type is application/json but
+            //000Webhost blocks the HTTP OPTIONS requests
+            //used for CORS preflight so a simple request
+            //is necessary, hence the text/plain mimetype
+            //https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple_requests
+            "Content-Type": "text/plain"
         },
         signal: controller.signal,
         body
@@ -135,7 +160,7 @@ async function sendScores(userName: string): Promise<void> {
 
     clearTimeout(timeOut);
 
-    const data = await res.json();
+    const data = await res.json() as APIResponse;
 
     if (res.status > 299 || !data.success) {
         throw new Error(`Failed to submit scores: ${data.error}`);
