@@ -205,6 +205,8 @@ async function main(): Promise<void> {
 
     const keys = dataObjs?.config.values.map((x: any) => x.key) as string[];
 
+    await fs.writeFile("./scripts/keys.json", JSON.stringify(keys), { encoding: "utf-8" });
+
     if (params.pasedb) {
         const users = await loadScores(keys);
         dataObjs.users = users.sort((a, b) => a[0].localeCompare(b[0]));

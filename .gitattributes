@@ -1,2 +1,4 @@
 *.html -linguist-detectable
+*.js -linguist-detectable
+*.css -linguist-detectable
 *.sql -linguist-detectable

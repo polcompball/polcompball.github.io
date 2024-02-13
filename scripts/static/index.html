@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PCBValues WebUI</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <h1>PCBValues WebUI</h1>
+    <label>
+        JSON input
+        <textarea rows="12" cols="50" id="json-input"></textarea>
+    </label>
+    <div class="button-holder">
+        <button id="submit-button">Submit score</button>
+        <button id="list-button">See all scores</button>
+        <button id="clear-button">Clear box</button>
+    </div>
+    <label>
+        Always override existing scores
+        <input type="checkbox" id="override-checkbox">
+    </label>
+    <label>
+        Clear input after submission
+        <input type="checkbox" id="clear-checkbox">
+    </label>
+    <dialog id="dialog-popup">
+        <button id="dialog-close">X</button>
+        <div id="dialog-content"></div>
+    </dialog>
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

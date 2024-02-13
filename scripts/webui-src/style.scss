@@ -1,0 +1,72 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    text-align: center;
+}
+
+label {
+    display: block;
+}
+
+button {
+    cursor: pointer;
+}
+
+#json-input {
+    line-height: 12pt;
+    display: block;
+    margin: 2px auto;
+}
+
+::backdrop {
+    backdrop-filter: blur(10px);
+}
+
+dialog {
+    max-height: 60vh;
+}
+
+#dialog-close {
+    right: 5px;
+    top: 5px;
+    position: absolute;
+    border: none;
+}
+
+#dialog-content {
+    top: 10px;
+    position: relative;
+    max-height: calc(60vh - 15px);
+    overflow-y: scroll;
+}
+
+.monospaced {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.list-container {
+    max-width: 96%;
+}
+
+.list-elm {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid limegreen;
+    border-radius: 2px;
+    padding: 1px;
+    margin: 2px 0;
+
+    .right-align {
+        align-self: flex-end;
+        text-align: end;
+    }
+
+    .left-align {
+        align-self: flex-start;
+        text-align: start;
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "outDir": "../static",
+        "target": "ES2022",
+        "moduleResolution": "NodeNext",
+        "module": "NodeNext",
+        "lib": [
+            "es2022",
+            "DOM",
+            "DOM.Iterable"
+        ],
+    }
+}
