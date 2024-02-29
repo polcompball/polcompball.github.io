@@ -102,9 +102,13 @@ const API = {
         if (!validateScores(data)) {
             return;
         }
+        const loadingElm = document.createElement("div");
+        loadingElm.textContent = "Submitting...";
+        openDialog(loadingElm);
         const resp = await JsonReq.post({
             action: "submit", override: String(override)
         }, data);
+        dialog.close();
         switch (resp.action) {
             case "CONFIRM":
                 const promptResp = await confirmDialog(resp.message);

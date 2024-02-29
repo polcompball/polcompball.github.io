@@ -138,7 +138,6 @@ export async function addDBEntry(
     const userString = data.toString("utf-8");
 
     const { name, values } = JSON.parse(userString) as Score;
-    console.log(name, values)
 
     if (typeof name !== "string") {
         throw new HTTPError("Invalid name", 400, Ctype.JSON);

@@ -1,10 +1,10 @@
 {
   "name": "pcbvalues.github.io",
-  "version": "3.1.4",
+  "version": "3.1.5",
   "main": "index.html",
   "scripts": {
     "build": "tsc && sass ./src/scss/style.sass ./dist/style.css && tsx ./scripts/build.ts --parsedb",
-    "release": "tsc && sass ./src/scss/style.sass ./dist/style.css --style=compressed --no-source-map && tsx ./scripts/build.ts --parsedb --minify && tsx ./scripts/delete.ts",
+    "release": "tsc --sourceMap false && sass ./src/scss/style.sass ./dist/style.css --style=compressed --no-source-map && tsx ./scripts/build.ts --parsedb --minify && tsx ./scripts/delete.ts",
     "sass-watch": "sass -w ./src/scss/style.sass ./dist/style.css",
     "tsc-watch": "tsc --watch",
     "score-server": "tsx ./scripts/server.ts",
@@ -15,14 +15,15 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
-    "@types/node": "^20.11.5",
+    "@types/node": "^20.11.24",
     "@types/pug": "^2.0.10",
+    "open": "^10.0.4",
     "pug": "^3.0.2",
-    "sass": "^1.69.7",
+    "sass": "^1.71.1",
     "sqlite": "^4.2.1",
     "sqlite3": "^5.1.7",
-    "terser": "^5.26.0",
-    "tsx": "^4.7.0",
+    "terser": "^5.28.1",
+    "tsx": "^4.7.1",
     "typescript": "^5.3.3"
   }
 }

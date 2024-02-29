@@ -128,9 +128,16 @@ const API = {
             return;
         }
 
+        const loadingElm = document.createElement("div");
+        loadingElm.textContent = "Submitting...";
+
+        openDialog(loadingElm);
+
         const resp = await JsonReq.post<APIResponse<{ score: Score }>>({
             action: "submit", override: String(override)
         }, data);
+
+        dialog.close();
 
         switch (resp.action) {
             case "CONFIRM":

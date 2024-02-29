@@ -6,6 +6,7 @@ import {
 } from "./server-logic";
 import * as http from "node:http";
 import { Buffer } from "node:buffer";
+import open from "open";
 
 const HOST = "localhost";
 const PORT = 8080;
@@ -114,5 +115,17 @@ const server = http.createServer(async (req, resp) => {
 });
 
 server.listen(PORT, HOST, () => {
-    console.log(`Server running on ${HOST}:${PORT}`);
+    process.stdout.write(`Server running on ${HOST}:${PORT}\nOpen browser? [y,N]`);
+    process.stdin.resume();
+
+    process.stdin.on("data", data => {
+        const uniformData = data.toString().toLowerCase();
+
+        if (uniformData.startsWith("y")) {
+            open(`http://${HOST}:${PORT}`);
+        }
+
+        process.stdout.write("\n");
+        process.stdin.end()
+    });
 });

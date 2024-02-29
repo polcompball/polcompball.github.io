@@ -1,4 +1,4 @@
-CREATE TABLE scores(
+CREATE TABLE IF NOT EXISTS scores(
     name text,
     dmnr real,
     pers real,
