@@ -122,7 +122,7 @@ function parseScores(scores: Record<string, any>, keys: string[]): score {
     const stats = keys.map(x => scores[x] as number);
     const { name } = scores as Record<string, string>;
 
-    return [name, stats];
+    return [decodeURIComponent(name), stats];
 }
 
 async function loadScores(keys: string[]): Promise<score[]> {

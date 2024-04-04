@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS scores(
-    name text,
-    dmnr real,
-    pers real,
-    judg real,
-    polt real,
-    real real,
-    perc real,
-    horn real
+    name TEXT PRIMARY KEY,
+    dmnr REAL,
+    pers REAL,
+    judg REAL,
+    polt REAL,
+    real REAL,
+    perc REAL,
+    horn REAL
 )

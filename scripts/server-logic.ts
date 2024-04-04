@@ -97,7 +97,7 @@ class DataBase {
         try {
             await this.db.run(
                 "INSERT OR REPLACE INTO scores VALUES(?,?,?,?,?,?,?,?)",
-                [name, ...scores]
+                [encodeURIComponent(name), ...scores]
             );
         } catch (e: unknown) {
             throw HTTPError.fromError(e, Ctype.JSON);

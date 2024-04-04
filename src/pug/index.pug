@@ -24,8 +24,8 @@ html
             class="button"
             onclick="location.href='instructions.html';"
             id="start-button"
-            )="Start the Test!"
-        h2="There are 14 values"
+            ) Start the Test!
+        h2 There are 14 values
         div(class="expl-block")
             each val, index in config.values
                 div(class="spacer")
@@ -41,15 +41,15 @@ html
                         p(class="value")
                             b(style=`color: ${val.color[1]};`)=capitalize(val.labels[1])
                         p(class="expl-text-right")=val.desc[1]
-        h2="Community Links"
+        h2 Community Links
         p(class="extras")
-            a(href="./gallery.html")="User Matches"
+            a(href="./gallery.html") User Matches
         p(class="extras")
-            a(href="./credits.html")= "Credits"
+            a(href="./credits.html") Credits
         p(class="extras") 
-            a(href="https://polcompballvalues.github.io/legacy/")= "Polcompballvalues V1 (Original Version of test)"
+            a(href="https://polcompballvalues.github.io/legacy/") Polcompballvalues V1 (Original Version of test)
         p(class="extras")
-            a(href="https://polcompballvalues.github.io/")= "Polcompballvalues V2 (Old Version of test)"
+            a(href="https://polcompballvalues.github.io/") Polcompballvalues V2 (Old Version of test)
 
 
             
