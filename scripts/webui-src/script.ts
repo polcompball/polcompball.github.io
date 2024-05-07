@@ -53,14 +53,14 @@ function validateScores(scores: unknown): boolean {
     if (typeof scores !== "object" || scores === null) {
         return false;
     }
-    const { name, values } = scores as Record<string, unknown>;
+    const { name, stats } = scores as Score;
 
     if (!name || typeof name !== "string") {
         return false;
     }
 
-    if (values && values instanceof Array) {
-        for (const i of values) {
+    if (stats && stats instanceof Array) {
+        for (const i of stats) {
             if (typeof i !== "number" || i < 0 || i > 100) {
                 return false;
             }
@@ -104,7 +104,7 @@ function confirmDialog(text: string): Promise<boolean> {
 
     return new Promise<boolean>((res, _rej) => {
         dialog.addEventListener("close", () => {
-            if (!resolved) {
+            if (!resolved && !dialog.open) {
                 res(false)
             }
         });
@@ -124,6 +124,8 @@ function confirmDialog(text: string): Promise<boolean> {
 const API = {
     submit: async function (scores: string, override: boolean): Promise<void> {
         const data = JSON.parse(scores);
+        data.stats = data.stats ?? data.values ?? data.vals;
+
         if (!validateScores(data)) {
             return;
         }
@@ -143,7 +145,7 @@ const API = {
             case "CONFIRM":
                 const promptResp = await confirmDialog(resp.message);
                 if (promptResp) {
-                    return API.submit(scores, true);
+                    await API.submit(scores, true);
                 }
                 break;
 
@@ -187,10 +189,10 @@ const API = {
 
         parent.appendChild(generateList("Names", ["dmnr", "pers", "judg", "polt", "real", "perc", "horn"]));
 
-        for (const { name, values } of resp.extra.scores) {
+        for (const { name, stats } of resp.extra.scores) {
             parent.appendChild(
                 generateList(
-                    name, values.map(x => x.toFixed(1))
+                    name, stats.map(x => x.toFixed(1))
                 )
             );
         }

@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS scores(
     name TEXT PRIMARY KEY,
+    flags INTEGER,
     dmnr REAL,
     pers REAL,
     judg REAL,
@@ -7,4 +8,4 @@ CREATE TABLE IF NOT EXISTS scores(
     real REAL,
     perc REAL,
     horn REAL
-)
+);

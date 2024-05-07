@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "../static",
+        "outDir": "../static/",
         "target": "ES2022",
         "moduleResolution": "NodeNext",
         "module": "NodeNext",

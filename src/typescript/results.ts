@@ -1,56 +1,59 @@
-import { getJson, Canvas, windowPromise, parseScores, currentTheme, parseUsers } from "./common.js";
+import { getJson, Canvas, windowPromise, parseScores, currentTheme, parseUsers, orderScores } from "./common.js";
 import type { Value, Score, CanvasParams } from "./types";
 
 declare global {
     var VERSION: string;
 }
 
+/**
+ * Hides half of value bar and border
+ * @param outer Outer div of the 
+ * value to edit
+ * @param side "Left" or "Right" to hide 
+ * the bar of.
+ */
+function hideBar(outer: HTMLDivElement, side: "Left" | "Right"): void {
+    outer.style[`border${side}Style`] = "solid";
+    outer.style[`borderTop${side}Radius`] = "28pt";
+    outer.style[`borderBottom${side}Radius`] = "28pt";
+    outer.style[`margin${side}`] = "4px";
+
+    const separator = outer.parentElement?.querySelector(".divider") as HTMLDivElement;
+    if (separator) {
+        separator.style.display = "none";
+    }
+}
+
+/**
+ * Sets HTML value bar of provided name to the given value.
+ * @param name Name of the value to change bar sizes.
+ * @param value Percentage to set the bar to.
+ * @param right Is value on the right or left side?
+ */
 function setBarValue(name: string, value: number, right: boolean): void {
-    const inner = document.getElementById(`span-${name}`);
-    const outer = document.getElementById(`bar-${name}`);
+    const inner = <HTMLDivElement>document.getElementById(`span-${name}`);
+    const outer = <HTMLDivElement>document.getElementById(`bar-${name}`);
     if (!inner || !outer) {
         throw new Error("Expected HTML elements not found");
     }
-    const adjVal = value > 95 ? 100 : value;
+
+    const compVal = value > 95 ? 100 : value;
     inner.textContent = `${value.toFixed(1)}%`;
-    outer.style.width = `${adjVal.toFixed(1)}%`;
+    outer.style.width = `${compVal.toFixed(1)}%`;
     inner.style.display = value > 20 ? "block" : "none";
     outer.style.display = value >= 2 ? "block" : "none";
 
     if (value > 98) {
-        const side = right ? "Left" : "Right";
-        outer.style[`border${side}Style`] = "solid";
-        outer.style[`borderTop${side}Radius`] = "28pt";
-        outer.style[`borderBottom${side}Radius`] = "28pt";
-        outer.style[`margin${side}`] = "4px";
-        const separator = outer.parentElement?.querySelector(".divider") as HTMLDivElement;
-        if (separator) separator.style.display = "none";
+        hideBar(outer, right ? "Left" : "Right");
     }
 }
 
-function orderScores(score: number[], users: Score[]): Required<Score>[] {
-    const ordered = [] as Required<Score>[];
-
-    const weights = [1, 1, 1, 0.5, 0.5, 0, 1];
-    const weightSum = weights.reduce((pv, cv) => pv + cv, 0);
-
-    for (const user of users) {
-        let sum = 0;
-        for (const [i, stat] of user.stats.entries()) {
-            const weight = weights[i] ?? 1;
-            const delta = Math.abs(score[i] - stat);
-            sum += ((delta / 100) * weight) ** 2;
-        }
-        ordered.push({
-            ...user,
-            bias: sum / weightSum
-        });
-    }
-
-    return ordered.sort((a, b) => a.bias - b.bias);
-}
-
-
+/**
+ * Lists the closest matches on the webpage
+ * and returns the top one's name.
+ * @param users Sorted biased users.
+ * @returns Top match's name
+ */
 function addClosestMatches(users: Required<Score>[]): string {
     const matchBias = (1 - users[0].bias) * 100;
 
@@ -70,6 +73,13 @@ function addClosestMatches(users: Required<Score>[]): string {
     return users[0].name;
 }
 
+/**
+ * Draws provided scores on both the
+ * HTML value bars and the Canvas.
+ * @param canvas Score Canvas instance
+ * @param values Values objects in order of use.
+ * @param scores Current result's scores
+ */
 async function drawScores(canvas: Canvas, values: Value[], scores: number[]): Promise<void> {
     for (const [i, value] of values.entries()) {
         const { labels } = value;
@@ -87,9 +97,12 @@ async function drawScores(canvas: Canvas, values: Value[], scores: number[]): Pr
 }
 
 
+/**
+ * Gets the requires values, initializes and mounts all the necessary events.
+ */
 async function main() {
     const [values, rawUsers, _] = await Promise.all(
-        [getJson<Value[]>("values"), getJson<[string, number[]][]>("users"), windowPromise]
+        [getJson("values"), getJson("users"), windowPromise]
     );
 
     const users = parseUsers(rawUsers);

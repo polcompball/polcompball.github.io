@@ -1,14 +1,13 @@
-import { getJson, windowPromise } from "./common.js";
-import { Question, Value } from "./types";
+import { getJson, windowPromise, shuffleArray } from "./common.js";
+import { Question } from "./types";
 
 const questionNumber = <HTMLHeadingElement>document.getElementById("question-number")!;
 const questionText = <HTMLParagraphElement>document.getElementById("question-text")!;
 
-function storeTime(hash: string): void {
-    const now = new Date();
-    localStorage.setItem(hash, now.toISOString());
-}
-
+/**
+ * Class representing an instance of the Quiz,
+ * its questions, the answer and the progression.
+ */
 class Quiz {
     private _index: number;
     private _questions: Question[];
@@ -22,31 +21,83 @@ class Quiz {
         this._short = short;
     }
 
+    /**
+     * Question index (1-based index).
+     */
     get index(): number {
         return this._index + 1;
     }
 
+    /**
+     * Total number of quiz questions.
+     */
     get size(): number {
         return this._questions.length;
     }
 
+    /**
+     * If the question is of the yes/no type
+     */
     get yesno(): boolean {
         return Boolean(this._questions[this._index].flags & 0b10);
     }
 
+    /**
+     * Text body of the current question.
+     */
     get text(): string {
         return this._questions[this._index].text;
     }
 
+    /**
+     * Moves the quiz to the next question.
+     * @param weight Weight of the answer selected 
+     * by the user for the current question.
+     * @returns if more questions remain ahead
+     */
     nextQuestion(weight: number): boolean {
         this._scores[this._index] = weight;
         return ++this._index < this._questions.length;
     }
 
+    /**
+     * Moves the quiz to the previous question.
+     * @returns if there's any questions to go back to.
+     */
     previousQuestion(): boolean {
         return this._index-- > 0;
     }
 
+    /**
+     * Digests a string using the SHA-512 algorythm
+     * for validating the authenticity of results.
+     * @param input the string to digested
+     * @returns The digested string, base64 encoded.
+     */
+    static async _digestString(input: string): Promise<string> {
+        const bytes = (new TextEncoder).encode(input);
+        const digest = await crypto.subtle.digest("SHA-512", bytes);
+        const digestStr = String.fromCharCode(... new Uint8Array(digest));
+        return btoa(digestStr);
+    }
+
+    /**
+     * Stores a string hash with the current time
+     * for analytics and recordkeeping. 
+     * This data only leaves the browser if associated
+     * score is submitted.
+     * @param hash String hash to store.
+     */
+    static _storeTime(hash: string): void {
+        const now = new Date();
+        localStorage.setItem(hash, now.toISOString());
+    }
+
+    /**
+     * Calcualates final scores and returns a URL for
+     * the results page with the associated score.
+     * @returns results url
+     */
     async getScores(): Promise<string> {
         const len = this._questions[0].effect.length;
 
@@ -73,12 +124,9 @@ class Quiz {
         }
 
         const scoreStr = finalScores.map(x => x.toFixed(1)).join(",");
-        const scoreBytes = (new TextEncoder).encode(scoreStr);
-        const scoreDigest = await crypto.subtle.digest("SHA-512", scoreBytes);
-        const digestStr = String.fromCharCode(... new Uint8Array(scoreDigest));
-        const b64Digest = btoa(digestStr);
+        const b64Digest = await Quiz._digestString(scoreStr);
 
-        storeTime(b64Digest);
+        Quiz._storeTime(b64Digest);
 
         const params = new URLSearchParams([
             ["score", scoreStr],
@@ -89,10 +137,18 @@ class Quiz {
     }
 }
 
-function renderQuestion(quiz: Quiz, elements: HTMLElement[]): void {
+/**
+ * Renders a question to the page.
+ * To be called every time something needs
+ * to be updated about the quiz.
+ * @param quiz Instance of Quiz class to render info.
+ * @param buttons Array containing quiz button elements
+ */
+function renderQuestion(quiz: Quiz, buttons: HTMLButtonElement[]): void {
     questionNumber.textContent = `Question ${quiz.index} of ${quiz.size}`;
     questionText.textContent = quiz.text;
-    for (const [i, elm] of elements.entries()) {
+
+    for (const [i, elm] of buttons.entries()) {
         if (quiz.yesno) {
             switch (i) {
                 case 0:
@@ -119,20 +175,26 @@ function renderQuestion(quiz: Quiz, elements: HTMLElement[]): void {
     }
 }
 
-function main(questions: Question[], values: Value[], short: boolean, random: boolean): void {
+/**
+ * Initializes and assigns events to the quiz page.
+ * @param questions Parsed Question array
+ * @param short Is the quiz short form?
+ * @param random Randomize questions?
+ */
+function main(questions: Question[], short: boolean, random: boolean): void {
     const keys = ["stag", "ag", "neut", "disag", "stdisag"];
 
     const parsedQuestions = short ? questions.filter(x => x.flags & 0b01) : questions;
-    const randQuestions = random ? parsedQuestions.sort(() => 0.5 - Math.random()) : parsedQuestions;
+    const randQuestions = random ? shuffleArray(parsedQuestions) : parsedQuestions;
     const quiz = new Quiz(randQuestions, short);
 
-    const elements = keys.map(v => document.getElementById(`button-${v}`)!);
+    const buttons = keys.map(v => <HTMLButtonElement>document.getElementById(`button-${v}`)!);
 
-    for (const [i, elm] of elements.entries()) {
+    for (const [i, elm] of buttons.entries()) {
         const weight = (2 - i) / 2;
         elm.addEventListener("click", () => {
             if (quiz.nextQuestion(weight)) {
-                renderQuestion(quiz, elements);
+                renderQuestion(quiz, buttons);
             } else {
                 quiz.getScores().then(
                     score => location.href = score
@@ -144,18 +206,18 @@ function main(questions: Question[], values: Value[], short: boolean, random: bo
     document.getElementById("back-button")!
         .addEventListener("click", () => {
             if (quiz.previousQuestion()) {
-                renderQuestion(quiz, elements);
+                renderQuestion(quiz, buttons);
             } else {
                 window.history.back();
             }
         });
 
-    renderQuestion(quiz, elements);
+    renderQuestion(quiz, buttons);
 }
 
 (async () => {
-    const [questions, values, _] = await Promise.all(
-        [getJson<Question[]>("questions"), getJson<Value[]>("values"), windowPromise]
+    const [questions, _] = await Promise.all(
+        [getJson("questions"), windowPromise]
     );
 
     const urlChar = [...location.search.toLowerCase()];
@@ -163,5 +225,5 @@ function main(questions: Question[], values: Value[], short: boolean, random: bo
     const short = urlChar.some(x => x === "s");
     const random = urlChar.some(x => x === "r");
 
-    main(questions, values, short, random);
+    main(questions, short, random);
 })()

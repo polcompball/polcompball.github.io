@@ -1,13 +1,12 @@
 {
     "compilerOptions": {
         "lib": [
-            "ES2023"
+            "ES2023",
+            "DOM"
         ],
-        "module": "NodeNext",
-        "allowImportingTsExtensions": true,
         "noEmit": true,
         "strictNullChecks": true,
-        "moduleResolution": "NodeNext",
+        "esModuleInterop": true,
         "types": [
             "@types/node"
         ],

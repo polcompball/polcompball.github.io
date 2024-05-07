@@ -41,12 +41,12 @@ function validateScores(scores) {
     if (typeof scores !== "object" || scores === null) {
         return false;
     }
-    const { name, values } = scores;
+    const { name, stats } = scores;
     if (!name || typeof name !== "string") {
         return false;
     }
-    if (values && values instanceof Array) {
-        for (const i of values) {
+    if (stats && stats instanceof Array) {
+        for (const i of stats) {
             if (typeof i !== "number" || i < 0 || i > 100) {
                 return false;
             }
@@ -80,7 +80,7 @@ function confirmDialog(text) {
     let resolved = false;
     return new Promise((res, _rej) => {
         dialog.addEventListener("close", () => {
-            if (!resolved) {
+            if (!resolved && !dialog.open) {
                 res(false);
             }
         });
@@ -99,6 +99,7 @@ function confirmDialog(text) {
 const API = {
     submit: async function (scores, override) {
         const data = JSON.parse(scores);
+        data.stats = data.stats ?? data.values ?? data.vals;
         if (!validateScores(data)) {
             return;
         }
@@ -113,7 +114,7 @@ const API = {
             case "CONFIRM":
                 const promptResp = await confirmDialog(resp.message);
                 if (promptResp) {
-                    return API.submit(scores, true);
+                    await API.submit(scores, true);
                 }
                 break;
             case "SUCCESS":
@@ -148,8 +149,8 @@ const API = {
             return child;
         }
         parent.appendChild(generateList("Names", ["dmnr", "pers", "judg", "polt", "real", "perc", "horn"]));
-        for (const { name, values } of resp.extra.scores) {
-            parent.appendChild(generateList(name, values.map(x => x.toFixed(1))));
+        for (const { name, stats } of resp.extra.scores) {
+            parent.appendChild(generateList(name, stats.map(x => x.toFixed(1))));
         }
         openDialog(parent);
     }

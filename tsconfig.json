@@ -3,16 +3,23 @@
         "outDir": "dist",
         "rootDir": "src/typescript",
         "sourceMap": true,
-        "lib": ["ES2023","DOM","DOM.Iterable"],
+        "lib": [
+            "ES2023",
+            "DOM",
+            "DOM.Iterable"
+        ],
         "module": "ES2022",
         "target": "ES2022",
         "removeComments": true,
         "moduleResolution": "node",
+        "strictNullChecks": true,
+        "noUncheckedIndexedAccess": false,
         "esModuleInterop": true,
         "strict": true
     },
     "exclude": [
         "dist",
-        "scripts"
+        "scripts",
+        "test"
     ]
 }

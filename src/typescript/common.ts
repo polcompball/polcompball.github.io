@@ -1,6 +1,8 @@
-type Jsons = "questions" | "users" | "values";
-import type { Value, CanvasParams, HeaderParams, Score } from "./types"
+import type { Value, CanvasParams, HeaderParams, Score, ScoreTuple, JsonTypes } from "./types"
 
+/**
+ * Promise that resolves as the Window load event is triggered.
+ */
 export const windowPromise = new Promise<void>(
     res => {
         window.addEventListener("load", () => res());
@@ -9,13 +11,22 @@ export const windowPromise = new Promise<void>(
 
 type Theme = "light" | "dark";
 
+/**
+ * Checks the currently active time.
+ * @returns Currently active time.
+ */
 export function currentTheme(): Theme {
     const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     return dark ? "dark" : "light";
 }
 
-export async function getJson<T>(path: Jsons): Promise<T> {
-    const filePath = `./dist/${path}.json`;
+/**
+ * Type-safe getter for the test's configuration JSONs.
+ * @param jsonType JSON file to get
+ * @returns Corresponding partsed JS object
+ */
+export async function getJson<T extends keyof JsonTypes>(jsonType: T): Promise<JsonTypes[T]> {
+    const filePath = `./dist/${jsonType}.json`;
     const resp = await fetch(filePath);
     if (resp.status > 299) {
         throw new Error(`Error in requesting file, status:${resp.status}`);
@@ -24,9 +35,45 @@ export async function getJson<T>(path: Jsons): Promise<T> {
     if (!contentType || !contentType.startsWith("application/json")) {
         throw new Error(`Invalid mime type for response, expected application/json, got ${contentType}`);
     }
-    return resp.json() as T;
+    return resp.json() as Promise<JsonTypes[T]>;
 }
 
+const scoreWeights = [1, 1, 1, 0.5, 0.5, 0, 1];
+
+/**
+ * Orders scores of all users based on how close they are
+ * to the current score.
+ * @param score Current score to weigh.
+ * @param users user matches to weigh against.
+ * @returns Score array ordered from the closest to
+ * the furthest match with the optional `bias` field.
+ */
+export function orderScores(score: number[], users: Score[]): Required<Score>[] {
+    const ordered = [] as Required<Score>[];
+    const weightSum = scoreWeights.reduce((pv, cv) => pv + cv, 0);
+
+    for (const user of users) {
+        let sum = 0;
+        for (const [i, stat] of user.stats.entries()) {
+            const weight = scoreWeights[i] ?? 1;
+            const delta = Math.abs(score[i] - stat);
+            sum += ((delta / 100) * weight) ** 2;
+        }
+        ordered.push({
+            ...user,
+            bias: sum / weightSum
+        });
+    }
+
+    return ordered.sort((a, b) => a.bias - b.bias);
+}
+
+/**
+ * Parses scores from string-delimited, URI encoded string.
+ * @param scoreString Nullable string for the values
+ * @param count number of scores to expect
+ * @returns Array of parsed scores
+ */
 export function parseScores(scoreString: string | null, count: number): number[] {
     if (!scoreString) {
         throw new Error("No scores provided");
@@ -43,13 +90,73 @@ export function parseScores(scoreString: string | null, count: number): number[]
     return numberScores;
 }
 
-export function parseUsers(users: [string, number[]][]): Score[] {
-    return users.map(([name, stats]) => ({ name, stats }));
+const flagTable = {
+    popular: 0b1,
+};
+
+export type Flags = keyof typeof flagTable;
+
+/**
+ * Parses flags integer into a record of the keys with booleans.
+ * @todo Implement all flags
+ * @param flagInt Integer containing the flags bitfield
+ * @returns Flags record
+ */
+export function parseFlags(flagInt: number): Record<Flags, boolean> {
+    if (!Number.isInteger(flagInt) || flagInt < 0) {
+        throw new Error("Invalid number provided");
+    }
+
+    const flagObj = {} as Record<Flags, boolean>;
+    for (const [name, mask] of Object.entries(flagTable)) {
+        flagObj[name as Flags] = Boolean(flagInt & mask);
+    }
+    return flagObj;
 }
 
-function loadImage(url: string): Promise<HTMLImageElement> {
+/**
+ * Transforms user match tuple into
+ * corresponding Score object
+ * @param users Array of score tuples to parse
+ * @returns Array of parsed score objects
+ */
+export function parseUsers(users: ScoreTuple[]): Score[] {
+    return users.map(([name, flags, stats]) => ({ name, flags, stats }));
+}
+
+/**
+ * Shuffles array without modifying the original array.
+ * @param input Array to shuffle
+ * @returns Shuffled array
+ */
+export function shuffleArray<T>(input: T[]): T[] {
+    const newArray = input.map(x => x) as T[];
+
+    for (const [i, elm] of newArray.entries()) {
+        const rnd = Math.floor(Math.random() * newArray.length);
+        [newArray[i], newArray[rnd]] = [newArray[rnd], elm];
+    }
+
+    return newArray;
+}
+
+/**
+ * Capitalize the first leter of a string.
+ * @param input Text to capitalize.
+ * @returns Text with capitalized first character.
+ */
+function capitalize(input: string): string {
+    return input.charAt(0).toUpperCase() + input.slice(1);
+}
+
+/**
+ * Loads image from the assets/values folder.
+ * @param name Name of the image in the values folder.
+ * @returns Loaded image element.
+ */
+function loadImage(name: string): Promise<HTMLImageElement> {
     const img = new Image();
-    img.src = `./assets/values/${url}`;
+    img.src = `./assets/values/${name}`;
     return new Promise<HTMLImageElement>((res, rej) => {
         img.addEventListener("load", () => res(img));
         img.addEventListener("abort", rej);
@@ -57,10 +164,9 @@ function loadImage(url: string): Promise<HTMLImageElement> {
     });
 }
 
-function capitalize(input: string): string {
-    return input.charAt(0).toUpperCase() + input.slice(1);
-}
-
+/**
+ * Class representing the Canvas containing scores of the test
+ */
 export class Canvas {
     private _ctx: CanvasRenderingContext2D;
     params: CanvasParams;
@@ -154,6 +260,14 @@ export class Canvas {
         this._ctx.fillRect(0, 0, 800, 150);
     }
 
+    /**
+     * Draws specified value at the specified index on the canvas.
+     * @param value Value to draw.
+     * @param score Corresponding value score.
+     * @param index Index to draw value at.
+     * @param drawImages Draw images or not (not for redraws)
+     * @returns Tier text for the corresponding score and value.
+     */
     async drawValue(value: Value, score: number, index: number, drawImages = true): Promise<string> {
         const height = 170 + index * 120;
 
@@ -171,6 +285,10 @@ export class Canvas {
         return tier;
     }
 
+    /**
+     * Draws quiz header with provided parameters.
+     * @param params Parameters to fill header with.
+     */
     drawHeader(params: HeaderParams): void {
         this._ctx.fillStyle = this.params.fg;
         this._ctx.font = `700 50px '${this.params.font}', sans-serif`;
@@ -193,11 +311,21 @@ export class Canvas {
         this._ctx.fillText(text, 780, 130);
     }
 
+    /**
+     * Finds tier based on scores
+     * @param score value of current score.
+     * @param tiers Array of possible tiers for the current value.
+     * @returns Corresponding tier text.
+     */
     static findTier(score: number, tiers: string[]): string {
         const index = Math.floor((100 - score) / 100 * tiers.length);
         return tiers[index] ?? tiers.at(-1);
     }
 
+    /**
+     * Download screenshot provided HTML canvas element.
+     * @param canvas Canvas element to download screenshot of.
+     */
     static download(canvas: HTMLCanvasElement): void {
         const link = document.createElement("a");
         link.href = canvas.toDataURL("image/png");

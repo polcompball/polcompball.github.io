@@ -30,6 +30,12 @@ let count = 0;
 const player = <LottiePlayer>document.querySelector("lottie-player")!;
 const name = <HTMLInputElement>document.getElementById("name")!;
 
+/**
+ * Prompts the user if they wish to
+ * download a scores JSON for manual
+ * submission.
+ * @param scores JSON string to download.
+ */
 function downloadScores(scores: string): void {
     if (confirm("Automatic submission of your scores failed, do you wish to download a copy of the scores to submit manually to the developers?")) {
         const link = document.createElement("a");
@@ -39,6 +45,14 @@ function downloadScores(scores: string): void {
     }
 }
 
+/**
+ * Plays a specified animation in the
+ * webpage's lottie player.
+ * @param animate Lottie file to select
+ * @param scores Scores JSON string
+ * to download at the end, ignore to
+ * not pass string to user.
+ */
 function playAnimation(animate: Animate, scores: string | null = null): void {
     player.load(files[animate]);
     player.style.display = "block";
@@ -55,6 +69,12 @@ function playAnimation(animate: Animate, scores: string | null = null): void {
     player.addEventListener("complete", listener);
 }
 
+/**
+ * Checks if username if valid and
+ * removes whitespace.
+ * @param userName Name to check
+ * @returns Trimmed name
+ */
 function checkUsername(userName: string): string {
     const trimmed = userName.trim();
     if (trimmed.length === 0) {
@@ -69,6 +89,14 @@ function checkUsername(userName: string): string {
     }
 }
 
+/**
+ * URL parameter parser with
+ * URI decoding built-in.
+ * @param urlParams Instance to search for
+ * @param param Key to search
+ * @returns Decoded string if found, null 
+ * if not found or empty string.
+ */
 function decodeParams(urlParams: URLSearchParams, param: string): string | null {
     const found = urlParams.get(param);
     if (!found) {
@@ -77,6 +105,11 @@ function decodeParams(urlParams: URLSearchParams, param: string): string | null 
     return decodeURIComponent(found);
 }
 
+/**
+ * Extracts the 3 parameters from the 
+ * current URL search section.
+ * @returns Tuple of edition, digest and the values.
+ */
 function getUrlParams(): [e: string | null, d: string | null, v: string | null] {
     const urlParams = new URLSearchParams(location.search);
 
@@ -87,6 +120,12 @@ function getUrlParams(): [e: string | null, d: string | null, v: string | null] 
     return [edition, digest, rawVals];
 }
 
+/**
+ * Finds when the user finished taking
+ * the test with the current score digest.
+ * @param hash digest to check localstorage
+ * @returns ISO-8601 string if found else null
+ */
 function getAnswerTime(hash: string | null): string | null {
     if (!hash) {
         return null;
@@ -94,6 +133,13 @@ function getAnswerTime(hash: string | null): string | null {
     return localStorage.getItem(hash);
 }
 
+/**
+ * Calculates the number of takes
+ * stored in the user's browser's
+ * localStorage by filtering all
+ * keys that do not meet the requirements.
+ * @returns Total quiz takes of the user.
+ */
 function totalTakes(): number {
     return Object.keys(localStorage).filter(x => {
         if (x.length < 64) {
@@ -115,25 +161,38 @@ function totalTakes(): number {
     }).length;
 }
 
-async function sendScores(userName: string): Promise<void> {
-
-    const [edition, digest, values] = getUrlParams();
+/**
+ * Creates a properly formatted JSON string
+ * containing the final score to be submitted
+ * @param userName Username to submit under
+ * @returns stringified JSON representation of
+ * score to be submitted.
+ */
+function prepareScoreObject(userName: string): string {
+    const [edition, digest, stats] = getUrlParams();
 
     const bodyObj = {
         name: userName,
-        vals: parseScores(values, globalThis.SIZE),
+        vals: parseScores(stats, globalThis.SIZE),
         time: getAnswerTime(digest),
         edition, digest,
         takes: totalTakes(),
         version: globalThis.VERSION
     };
 
-    const body = JSON.stringify(bodyObj);
+    return JSON.stringify(bodyObj);
+}
 
-    localStorage.setItem("last-submittion", body);
-
+/**
+ * Does an HTTP post request to the global API_URL
+ * with the provided JSON body and checks if it
+ * was submitted sucessfully.
+ * @param body JSON-stringified body to send
+ */
+async function sendScores(body: string): Promise<void> {
     const controller = new AbortController();
     const timeOut = setTimeout(
+        //Aborts request after waiting for 10 seconds without a response
         () => controller.abort(), 10_000
     );
 
@@ -151,11 +210,6 @@ async function sendScores(userName: string): Promise<void> {
         body
     };
 
-    player.load(files["loading"]);
-    player.style.display = "block";
-    player.loop = true;
-    player.play();
-
     const res = await fetch(globalThis.API_URL, params);
 
     clearTimeout(timeOut);
@@ -167,6 +221,9 @@ async function sendScores(userName: string): Promise<void> {
     }
 }
 
+/**
+ * Checks, confirms and submits score
+ */
 function sendMessage(): void {
     if (lock) {
         return;
@@ -182,8 +239,18 @@ function sendMessage(): void {
             return;
         }
     }
+
+    const scores = prepareScoreObject(userName);
+    localStorage.setItem("last-submittion", scores);
+
     lock = true;
-    sendScores(userName)
+
+    player.load(files["loading"]);
+    player.style.display = "block";
+    player.loop = true;
+    player.play();
+
+    sendScores(scores)
         .then(() => {
             count++;
             playAnimation("success");
@@ -191,7 +258,6 @@ function sendMessage(): void {
         .catch((err: Error) => {
             console.error(err);
 
-            const scores = localStorage.getItem("last-submittion");
             localStorage.removeItem("last-submittion");
 
             playAnimation("failure", scores);

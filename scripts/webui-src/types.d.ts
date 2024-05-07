@@ -1,7 +1,6 @@
-export type Score = {
-    name: string;
-    values: number[];
-};
+import type { Score } from "../../src/typescript/types.d.ts"
+
+export { Score };
 
 export type APIActions = "ERROR" | "CONFIRM" | "SUCCESS" | "FAILURE";
 

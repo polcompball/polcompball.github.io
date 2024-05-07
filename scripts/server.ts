@@ -1,9 +1,10 @@
-import type { Optional, RespTuple } from "./types";
-import { Ctype, APIActions } from "./enums"
+import type { RespTuple } from "./types.d.ts";
+import { Ctype, APIActions } from "./lib/enums.ts"
 import {
-    loadDBEntries, addDBEntry, findDBEntry,
+    loadDBEntries, addDBEntry, findDBEntry, editDBFlags,
     serveFile, renderPug, HTTPError, retrievePOSTBody
-} from "./server-logic";
+} from "./lib/server-logic.ts";
+import fs from "node:fs";
 import * as http from "node:http";
 import { Buffer } from "node:buffer";
 import open from "open";
@@ -30,7 +31,7 @@ async function getData(params: URLSearchParams): Promise<string> {
     }
 }
 
-async function postData(params: URLSearchParams, postData: Optional<Buffer>): Promise<string> {
+async function postData(params: URLSearchParams, postData: Buffer | null): Promise<string> {
     if (!postData) {
         throw new HTTPError("POST data missing", 400);
     }
@@ -44,34 +45,40 @@ async function postData(params: URLSearchParams, postData: Optional<Buffer>): Pr
         case "submit":
             return addDBEntry(postData, params.get("override"));
 
+        case "editflags":
+            return editDBFlags(postData);
+
         default:
             throw new HTTPError("Action not implemented", 501, Ctype.JSON);
     }
 }
 
-async function handleEndpoint(endpoint: Optional<string>, body: Optional<Buffer>): Promise<RespTuple> {
+async function handleEndpoint(endpoint: string | null | undefined, body: Buffer | null): Promise<RespTuple> {
     const { pathname, searchParams } = new URL(endpoint ?? "/", BASE_URL);
 
     switch (pathname.toLowerCase()) {
         case "/":
         case "/index":
         case "/index.html":
-            return [await serveFile("index.html"), Ctype.HTML, 200];
+            return [await serveFile("index.html"), Ctype.HTML, 200, false];
 
         case "/script.js":
-            return [await serveFile("script.js"), Ctype.JS, 200];
+            return [await serveFile("script.js"), Ctype.JS, 200, false];
 
         case "/style.css":
-            return [await serveFile("style.css"), Ctype.CSS, 200];
+            return [await serveFile("style.css"), Ctype.CSS, 200, false];
+
+        case "/icon.png":
+            return ["./assets/icon.png", Ctype.PNG, 200, true];
 
         case "/get":
-            return [await getData(searchParams), Ctype.JSON, 200];
+            return [await getData(searchParams), Ctype.JSON, 200, false];
 
         case "/post":
-            return [await postData(searchParams, body), Ctype.JSON, 200];
+            return [await postData(searchParams, body), Ctype.JSON, 200, false];
 
         default:
-            return [await serveFile("404.html"), Ctype.HTML, 404];
+            return [await serveFile("404.html"), Ctype.HTML, 404, false];
     }
 }
 
@@ -89,29 +96,36 @@ async function handleRequest(req: http.IncomingMessage): Promise<RespTuple> {
             switch (ctype) {
                 case Ctype.HTML:
                     const file = await renderPug("template.pug", { message, status });
-                    return [file, Ctype.HTML, status];
+                    return [file, Ctype.HTML, status, false];
 
                 case Ctype.JSON:
                     const body = JSON.stringify({
                         action: APIActions[APIActions.ERROR],
                         message
                     });
-                    return [body, Ctype.JSON, status]
+                    return [body, Ctype.JSON, status, false]
 
                 default:
-                    return [`/*${message}*/\n`, ctype, status];
+                    return [`/*${message}*/\n`, ctype, status, false];
             }
         }
-        return [await serveFile("500.html"), Ctype.HTML, 500];
+        return [await serveFile("500.html"), Ctype.HTML, 500, false];
     }
 }
 
 const server = http.createServer(async (req, resp) => {
-    const [respBody, ctype, status] = await handleRequest(req);
+    const [respBody, ctype, status, binary] = await handleRequest(req);
 
-    resp.setHeader("Content-Type", ctype);
-    resp.writeHead(status);
-    resp.end(respBody, "utf-8");
+    if (binary) {
+        const stream = fs.createReadStream(respBody);
+        resp.statusCode = 200;
+        resp.setHeader("Content-Type", ctype);
+        stream.pipe(resp);
+    } else {
+        resp.setHeader("Content-Type", ctype);
+        resp.writeHead(status);
+        resp.end(respBody, "utf-8");
+    }
 });
 
 server.listen(PORT, HOST, () => {
@@ -125,7 +139,7 @@ server.listen(PORT, HOST, () => {
             open(`http://${HOST}:${PORT}`);
         }
 
-        process.stdout.write("\n");
+        process.stdout.write("\nPress ctrl+c to close server");
         process.stdin.end()
     });
 });
